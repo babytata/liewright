@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - Liewright</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #bdccd4;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #1c1c1c;
+            padding: 1rem 20px;
+            border-bottom: 2px solid #bbbdbf;
+        }
+        nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a.logo img {
+            height: 20px !important;
+            vertical-align: middle;
+        }
+        nav ul li a.logo {
+            padding: 0;
+        }
+        nav ul li a.logo:hover {
+            background-color: transparent;
+        }
+        .nav-carousel {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-items-container {
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+        }
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
+        }
+        nav ul.nav-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        nav ul.nav-items li {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+        nav ul li a {
+            color: #bdccd4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #bbbdbf;
+            color: #111;
+        }
+        .scroll-btn {
+            background: transparent;
+            border: none;
+            color: #bdccd4;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3;
+            padding: 0 10px;
+        }
+        h1 {
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #bbbdbf;
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .policy-content {
+            text-align: left;
+            padding: 0 20px;
+        }
+        .policy-content h2 {
+            color: #bbbdbf;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+        .policy-content p, .policy-content ul {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .policy-content ul {
+            padding-left: 20px;
+        }
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+        }
+        .footer-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .footer-logo img {
+            height: 25px !important;
+        }
+        .sitemap {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+        }
+        .sitemap-col {
+            margin: 0 20px;
+            min-width: 150px;
+        }
+        .sitemap-col h4 {
+            color: #bbbdbf;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .sitemap-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+        .sitemap-col a:hover {
+            color: #bbbdbf;
+        }
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-carousel">
+                <button class="scroll-btn prev" aria-label="Previous"><</button>
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">Art</a></li>
+                        <li><a href="#">Apparel</a></li>
+                        <li><a href="apps.php">Apps</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <button class="scroll-btn next" aria-label="Next">></button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <div class="policy-content">
+            <p><em>Last updated: <?php echo date("F j, Y"); ?></em></p>
+
+            <h2>Introduction</h2>
+            <p>Liewright ("we," "our," "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. We take your privacy seriously and are committed to handling your data with respect and care.</p>
+
+            <h2>Information We Collect</h2>
+            <p>We may collect information about you in a variety of ways. The information we may collect on the Site includes:</p>
+            <ul>
+                <li><strong>Personal Data:</strong> Personally identifiable information, such as your name and email address, that you voluntarily give to us when you subscribe to our newsletter or contact us.</li>
+                <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.</li>
+            </ul>
+
+            <h2>How We Use Your Information</h2>
+            <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
+            <ul>
+                <li>Send you our newsletter.</li>
+                <li>Respond to your comments and questions and provide customer service.</li>
+                <li>Monitor and analyze usage and trends to improve your experience with the Site.</li>
+                <li>Protect our website from abuse and ensure its security.</li>
+            </ul>
+
+            <h2>Disclosure of Your Information</h2>
+            <p>We are in the business of creating, not selling data. We do not sell, trade, or rent your personal information to others. However, as a small business, we may need to explore various avenues to sustain our work. Our policy on this is as follows:</p>
+            <ul>
+                <li><strong>Current Practice:</strong> We do not currently sell your personal information.</li>
+                <li><strong>Future Possibilities:</strong> If our business model changes, we may consider sharing or selling aggregated, anonymous data that does not personally identify you. If we ever decide to sell personal data, we will update this privacy policy and provide you with clear, prior notice and an opportunity to opt-out.</li>
+                <li><strong>Service Providers:</strong> We may share your information with third-party vendors, consultants, and other service providers who perform services for us or on our behalf and require access to such information to do that work (e.g., email delivery services for our newsletter). These parties are contractually obligated to protect your data.</li>
+            </ul>
+
+            <h2>Data Security</h2>
+            <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+
+            <h2>Your Rights and Choices</h2>
+            <p>You have the right to opt-out of our newsletter at any time by clicking the "unsubscribe" link in the emails we send. You may also contact us to request access to, correction of, or deletion of your personal information.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:privacy@liewright.com">privacy@liewright.com</a>.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
+        </div>
+        <div class="sitemap">
+            <div class="sitemap-col">
+                <h4>Liewright</h4>
+                <a href="/">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="sitemap-col">
+                <h4>Work</h4>
+                <a href="#">Art</a>
+                <a href="#">Apparel</a>
+            </div>
+            <div class="sitemap-col">
+                <h4>Projects</h4>
+                <a href="apps.php">Apps</a>
+            </div>
+             <div class="sitemap-col">
+                <h4>Legal</h4>
+                <a href="liewright-privacy-policy.php">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © <?php echo date("Y"); ?> Liewright — All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>

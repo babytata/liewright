@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soundulator Privacy Policy - Liewright</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #eee;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #1c1c1c;
+            padding: 1rem 20px;
+            border-bottom: 2px solid #bbbdbf;
+        }
+        nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a.logo img {
+            height: 20px !important;
+            vertical-align: middle;
+        }
+        nav ul li a.logo {
+            padding: 0;
+        }
+        nav ul li a.logo:hover {
+            background-color: transparent;
+        }
+        .nav-carousel {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-items-container {
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+        }
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
+        }
+        nav ul.nav-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        nav ul.nav-items li {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+        nav ul li a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #bbbdbf;
+            color: #111;
+        }
+        .scroll-btn {
+            background: transparent;
+            border: none;
+            color: #eee;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3;
+            padding: 0 10px;
+        }
+        h1 {
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #bbbdbf;
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .policy-content {
+            text-align: left;
+            padding: 0 20px;
+        }
+        .policy-content p {
+            font-size: 1.1rem;
+            color: #ccc;
+            text-align: left;
+        }
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+        }
+        .footer-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .footer-logo img {
+            height: 25px !important;
+        }
+        .sitemap {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+        }
+        .sitemap-col {
+            margin: 0 20px;
+            min-width: 150px;
+        }
+        .sitemap-col h4 {
+            color: #bbbdbf;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .sitemap-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+        .sitemap-col a:hover {
+            color: #bbbdbf;
+        }
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-carousel">
+                <button class="scroll-btn prev" aria-label="Previous"><</button>
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">Art</a></li>
+                        <li><a href="#">Apparel</a></li>
+                        <li><a href="apps.php">Apps</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <button class="scroll-btn next" aria-label="Next">></button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Privacy Policy for Soundulator</h1>
+        <div class="policy-content">
+            <p>Soundulator does not collect, store, or share any personal data from users.</p>
+            <p>We do not use third-party analytics, ad networks, or tracking technologies. All interactions with the app happen on-device and are not transmitted to any servers.</p>
+            <p>If you have questions or concerns, contact us at: <a href="mailto:inquiries.policy@fastmail.com">inquiries.policy@fastmail.com</a>.</p>
+            <p><em>Last updated: <?php echo date("F j, Y"); ?></em></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
+        </div>
+        <div class="sitemap">
+            <div class="sitemap-col">
+                <h4>Liewright</h4>
+                <a href="/">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="sitemap-col">
+                <h4>Work</h4>
+                <a href="#">Art</a>
+                <a href="#">Apparel</a>
+            </div>
+            <div class="sitemap-col">
+                <h4>Projects</h4>
+                <a href="apps.php">Apps</a>
+            </div>
+            <div class="sitemap-col">
+                <h4>Legal</h4>
+                <a href="liewright-privacy-policy.php">Privacy Policy</a>
+                <a href="soundulator-privacy-policy.php">Soundulator Privacy</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © <?php echo date("Y"); ?> Liewright — All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
