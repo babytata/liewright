@@ -139,6 +139,7 @@
             color: #bbbdbf;
             font-weight: 700;
         }
+        /* Footer Updates */
         footer {
             margin-top: 3rem;
             font-size: 0.9rem;
@@ -147,41 +148,54 @@
             border-top: 1px solid #333;
             padding: 40px 20px;
         }
-        .footer-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        /* --- CHANGED RULE --- */
-        .footer-logo img {
-            height: 25px !important; /* Made size smaller and added !important */
-        }
-        .sitemap {
+        
+        .footer-content {
             max-width: 900px;
             margin: 0 auto 30px auto;
             display: flex;
             justify-content: space-around;
             text-align: left;
             flex-wrap: wrap;
+            align-items: flex-start;
         }
-        .sitemap-col {
+
+        .footer-col {
             margin: 0 20px;
-            min-width: 150px;
+            min-width: 120px;
         }
-        .sitemap-col h4 {
+        .footer-col h4 {
             color: #bbbdbf;
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
-        .sitemap-col a {
+        .footer-col a {
             color: #ccc;
             text-decoration: none;
             display: block;
             margin-bottom: 5px;
             transition: color 0.3s;
         }
-        .sitemap-col a:hover {
+        .footer-col a:hover {
             color: #bbbdbf;
         }
+        
+        /* Logo in footer */
+        .footer-logo-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px; 
+        }
+        .footer-logo-col img {
+            height: 25px !important;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .footer-logo-col img:hover {
+            opacity: 1;
+        }
+
         .copyright {
             text-align: center;
             font-size: 0.9rem;
@@ -242,19 +256,20 @@
     <header>
         <nav>
             <div class="nav-carousel">
-                <button class="scroll-btn prev" aria-label="Previous"><</button>
+                
                 <div class="nav-items-container">
                     <ul class="nav-items">
                         <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
                         <li><a href="/">Home</a></li>
-                        <li><a href="#">Art</a></li>
-                        <li><a href="#">Apparel</a></li>
-                        <li><a href="apps.php">Apps</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="graphic-design.html">Graphic Design</a></li>
+                        <li><a href="logo.html">Logo</a></li>
+                        <li><a href="illustration.html">Illustration</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                <button class="scroll-btn next" aria-label="Next">></button>
+                
             </div>
         </nav>
     </header>
@@ -294,93 +309,107 @@
     </div>
 
     <footer>
-        <div class="footer-logo">
-            <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
-        </div>
-        <div class="sitemap">
-            <div class="sitemap-col">
+        <div class="footer-content">
+            <div class="footer-col">
                 <h4>Liewright</h4>
                 <a href="/">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
-                <a href="subscribe.php">Subscribe</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
             </div>
-            <div class="sitemap-col">
-                <h4>Work</h4>
-                <a href="#">Art</a>
-                <a href="#">Apparel</a>
+            <div class="footer-col">
+                <h4>Collections</h4>
+                <a href="graphic-design.html">Graphic Design</a>
+                <a href="logo.html">Logo</a>
+                <a href="illustration.html">Illustration</a>
+                <a href="photography.html">Photography</a>
             </div>
-            <div class="sitemap-col">
-                <h4>Projects</h4>
-                <a href="apps.php">Apps</a>
+            <div class="footer-col">
+                <h4>Network</h4>
+                <a href="projects.html">Archives</a>
             </div>
-            <div class="sitemap-col">
+            <div class="footer-col">
                 <h4>Legal</h4>
-                <a href="liewright-privacy-policy.php">Privacy Policy</a>
+                <a href="liewright-privacy-policy.html">Privacy Policy</a>
+            </div>
+             <div class="footer-col footer-logo-col">
+                <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
             </div>
         </div>
         <div class="copyright">
-            © <?php echo date("Y"); ?> Liewright — All Rights Reserved.
+            © 2026 Liewright — All Rights Reserved.
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Nav Carousel Logic ---
             const carousel = document.querySelector('.nav-carousel');
-            const container = carousel.querySelector('.nav-items-container');
-            const navItems = carousel.querySelector('.nav-items');
-            const prevBtn = carousel.querySelector('.prev');
-            const nextBtn = carousel.querySelector('.next');
+            if (carousel) {
+                const navItems = carousel.querySelector('.nav-items');
+                if (navItems) {
+                    const items = navItems.querySelectorAll('li');
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
 
-            // Clone items for the infinite scroll effect
-            const items = navItems.querySelectorAll('li');
-            items.forEach(item => {
-                const clone = item.cloneNode(true);
-                navItems.appendChild(clone);
-            });
-             // Clone again to ensure enough items to fill the container and scroll
-             items.forEach(item => {
-                const clone = item.cloneNode(true);
-                navItems.appendChild(clone);
-            });
+                    let trackPos = 0;
+                    let currentScrollSpeed = 0;
+                    let targetScrollSpeed = 0;
+                    let isNavMouseOver = false;
+                    let mouseX = 0;
 
+                    carousel.addEventListener('mouseenter', () => isNavMouseOver = true);
+                    carousel.addEventListener('mouseleave', () => {
+                        isNavMouseOver = false;
+                    });
+                    carousel.addEventListener('mousemove', (e) => {
+                        mouseX = e.clientX;
+                    });
 
-            let scrollAmount = 0;
-            // Base scroll step on a text item's width for more consistent scrolling.
-            const itemWidth = items.length > 1 ? items[1].offsetWidth : 150;
-            const scrollStep = itemWidth; // Scroll by one item width
+                    function navLoop() {
+                        if (isNavMouseOver) {
+                            const rect = carousel.getBoundingClientRect();
+                            const width = rect.width;
+                            const relativeX = mouseX - rect.left;
+                            
+                            const leftThreshold = width * 0.25;
+                            const rightThreshold = width * 0.75;
+                            const maxSpeed = 8;
 
-            function scroll(direction) {
-                const containerWidth = container.offsetWidth;
-                const scrollWidth = navItems.scrollWidth;
-                const maxScroll = scrollWidth - containerWidth;
+                            if (relativeX < leftThreshold) {
+                                const ratio = 1 - (relativeX / leftThreshold);
+                                targetScrollSpeed = -1 * maxSpeed * ratio;
+                            } else if (relativeX > rightThreshold) {
+                                const ratio = (relativeX - rightThreshold) / (width - rightThreshold);
+                                targetScrollSpeed = maxSpeed * ratio;
+                            } else {
+                                targetScrollSpeed = 0;
+                            }
+                        } else {
+                            targetScrollSpeed = 0;
+                        }
 
-                scrollAmount += direction * scrollStep;
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.1;
 
-                // Infinite scroll logic
-                if (scrollAmount < 0) {
-                    // If scrolling past the beginning, jump to the equivalent position in the second set of clones
-                    scrollAmount = (scrollWidth / 2) - scrollStep;
-                    navItems.style.transition = 'none'; // Disable transition for the jump
-                    navItems.style.transform = `translateX(-${scrollAmount}px)`;
-                    // Force a reflow to apply the transform immediately
-                    navItems.offsetHeight;
-                    // Re-enable transition for the next scroll
-                    navItems.style.transition = 'transform 0.5s ease';
-                } else if (scrollAmount > scrollWidth / 2) {
-                     // If scrolling past the end of the first set, jump to the beginning
-                    scrollAmount = scrollStep;
-                    navItems.style.transition = 'none';
-                    navItems.style.transform = 'translateX(0px)';
-                    navItems.offsetHeight;
-                    navItems.style.transition = 'transform 0.5s ease';
+                        if (Math.abs(currentScrollSpeed) > 0.01) {
+                            trackPos += currentScrollSpeed;
+                            const scrollWidth = navItems.scrollWidth;
+                            const oneSetWidth = scrollWidth / 3;
+                            
+                            if (trackPos >= oneSetWidth) {
+                                trackPos = trackPos % oneSetWidth;
+                            } else if (trackPos < 0) {
+                                trackPos = oneSetWidth + (trackPos % oneSetWidth);
+                            }
+                            
+                            navItems.style.transform = `translateX(-${trackPos}px)`;
+                        }
+
+                        requestAnimationFrame(navLoop);
+                    }
+                    navLoop();
                 }
-
-                navItems.style.transform = `translateX(-${scrollAmount}px)`;
             }
-
-            prevBtn.addEventListener('click', () => scroll(-1));
-            nextBtn.addEventListener('click', () => scroll(1));
+            
 
             // Optional: Auto-scroll
             // setInterval(() => scroll(1), 3000);

@@ -123,6 +123,7 @@
             color: #ccc;
             text-align: left;
         }
+        /* Footer Updates */
         footer {
             margin-top: 3rem;
             font-size: 0.9rem;
@@ -131,40 +132,54 @@
             border-top: 1px solid #333;
             padding: 40px 20px;
         }
-        .footer-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .footer-logo img {
-            height: 25px !important;
-        }
-        .sitemap {
+        
+        .footer-content {
             max-width: 900px;
             margin: 0 auto 30px auto;
             display: flex;
             justify-content: space-around;
             text-align: left;
             flex-wrap: wrap;
+            align-items: flex-start;
         }
-        .sitemap-col {
+
+        .footer-col {
             margin: 0 20px;
-            min-width: 150px;
+            min-width: 120px;
         }
-        .sitemap-col h4 {
+        .footer-col h4 {
             color: #bbbdbf;
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
-        .sitemap-col a {
+        .footer-col a {
             color: #ccc;
             text-decoration: none;
             display: block;
             margin-bottom: 5px;
             transition: color 0.3s;
         }
-        .sitemap-col a:hover {
+        .footer-col a:hover {
             color: #bbbdbf;
         }
+        
+        /* Logo in footer */
+        .footer-logo-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px; 
+        }
+        .footer-logo-col img {
+            height: 25px !important;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .footer-logo-col img:hover {
+            opacity: 1;
+        }
+
         .copyright {
             text-align: center;
             font-size: 0.9rem;
@@ -179,19 +194,22 @@
     <header>
         <nav>
             <div class="nav-carousel">
-                <button class="scroll-btn prev" aria-label="Previous"><</button>
+                
                 <div class="nav-items-container">
                     <ul class="nav-items">
                         <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
                         <li><a href="/">Home</a></li>
-                        <li><a href="#">Art</a></li>
-                        <li><a href="#">Apparel</a></li>
-                        <li><a href="apps.php">Apps</a></li>
+                        <li><a href="graphic-design.html">Graphic Design</a></li>
+                        <li><a href="logo.html">Logo</a></li>
+                        <li><a href="illustration.html">Illustration</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
-                <button class="scroll-btn next" aria-label="Next">></button>
+                
             </div>
         </nav>
     </header>
@@ -202,38 +220,39 @@
             <p>Soundulator does not collect, store, or share any personal data from users.</p>
             <p>We do not use third-party analytics, ad networks, or tracking technologies. All interactions with the app happen on-device and are not transmitted to any servers.</p>
             <p>If you have questions or concerns, contact us at: <a href="mailto:inquiries.policy@fastmail.com">inquiries.policy@fastmail.com</a>.</p>
-            <p><em>Last updated: <?php echo date("F j, Y"); ?></em></p>
+            <p><em>Last updated: February 21, 2026</em></p>
         </div>
     </div>
 
     <footer>
-        <div class="footer-logo">
-            <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
-        </div>
-        <div class="sitemap">
-            <div class="sitemap-col">
+        <div class="footer-content">
+            <div class="footer-col">
                 <h4>Liewright</h4>
                 <a href="/">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
             </div>
-            <div class="sitemap-col">
-                <h4>Work</h4>
-                <a href="#">Art</a>
-                <a href="#">Apparel</a>
+            <div class="footer-col">
+                <h4>Collections</h4>
+                <a href="graphic-design.html">Graphic Design</a>
+                <a href="logo.html">Logo</a>
+                <a href="illustration.html">Illustration</a>
+                <a href="photography.html">Photography</a>
             </div>
-            <div class="sitemap-col">
-                <h4>Projects</h4>
-                <a href="apps.php">Apps</a>
+            <div class="footer-col">
+                <h4>Network</h4>
+                <a href="projects.html">Archives</a>
             </div>
-            <div class="sitemap-col">
+            <div class="footer-col">
                 <h4>Legal</h4>
-                <a href="liewright-privacy-policy.php">Privacy Policy</a>
-                <a href="soundulator-privacy-policy.php">Soundulator Privacy</a>
+                <a href="liewright-privacy-policy.html">Privacy Policy</a>
+            </div>
+             <div class="footer-col footer-logo-col">
+                <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
             </div>
         </div>
         <div class="copyright">
-            © <?php echo date("Y"); ?> Liewright — All Rights Reserved.
+            © 2026 Liewright — All Rights Reserved.
         </div>
     </footer>
 </body>

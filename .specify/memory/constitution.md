@@ -1,50 +1,85 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+==================
+Version change: (none / template) → 1.0.0
+Modified principles: N/A (initial fill from template)
+Added sections: None
+Removed sections: None
+Templates:
+  - .specify/templates/plan-template.md ✅ (Constitution Check is generic; no update required)
+  - .specify/templates/spec-template.md ✅ (scope/requirements align; no update required)
+  - .specify/templates/tasks-template.md ✅ (task types compatible; no update required)
+  - .cursor/commands/*.md ✅ (no CLAUDE-only references; commands live in .cursor/commands/)
+Follow-up TODOs: None. RATIFICATION_DATE set to first-adoption date (same as Last Amended).
+-->
+
+# Liewright Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User-First & Accessibility
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Pages MUST be usable on common viewports and readable without relying on color alone. Critical
+actions MUST be reachable via keyboard and work with standard assistive patterns. Rationale:
+Liewright is a public-facing site; inclusive design is non-negotiable for trust and reach.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Consistent UI & Brand
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+All pages MUST share the same navigation, header, and visual language (e.g. dark theme, Segoe UI,
+container max-width, border and color tokens). New pages MUST reuse existing layout and style
+patterns unless a documented exception is approved. Rationale: Consistency reduces cognitive load
+and maintains a single recognizable Liewright identity.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Security & Privacy by Default
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+User data and form submissions MUST be handled so that sensitive data is not logged or exposed.
+Privacy-critical flows (e.g. contact, subscribe) MUST align with the stated privacy policy pages.
+New features that collect or process personal data MUST be reviewed for compliance before merge.
+Rationale: The site includes privacy policies and forms; trust requires matching behavior.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Testable Behavior
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+User-facing behavior and critical paths (e.g. form submission, redirects, error handling) MUST be
+verifiable. When specs or plans require tests, tests MUST be written and failing before
+implementation; then implementation MUST satisfy them. Rationale: Prevents regressions and
+documents intended behavior as the project grows.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Simplicity & Maintainability
+
+Prefer plain PHP and minimal dependencies unless a concrete need is documented. Avoid
+over-abstraction and speculative features (YAGNI). New dependencies or architectural complexity
+MUST be justified in the implementation plan. Rationale: Keeps the codebase understandable and
+easy to change for a small-site context.
+
+## Technology & Stack
+
+- **Runtime**: PHP (version to be pinned in plan per environment).
+- **Front-end**: HTML/CSS in page scope; shared styles and structure reused across pages.
+- **Server**: Apache (htaccess present); deployment and hosting constraints documented in
+  feature plans where relevant.
+- **Testing**: Approach defined per feature; when tests are required, use project-standard paths
+  (e.g. tests/ unit or integration as per plan).
+
+## Development Workflow
+
+- New features MUST be specified (e.g. via speckit.specify) with user scenarios and acceptance
+  criteria before implementation.
+- Implementation plans MUST pass the Constitution Check (plan-template) before Phase 0 research.
+- Code changes MUST preserve consistent UI and brand unless the spec explicitly allows
+  divergence.
+- Privacy- or security-sensitive changes MUST be reviewed for alignment with this constitution
+  and existing privacy policy content.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes ad-hoc practices for scope, principles, and workflow described
+  here.
+- **Amendments**: Changes require updating this file, incrementing the version (semantic:
+  MAJOR = backward-incompatible principle removal/redefinition; MINOR = new principle or
+  section; PATCH = clarifications/typos), and updating the Sync Impact Report at the top.
+- **Compliance**: All PRs and feature plans MUST verify compliance with the principles above.
+  Exceptions MUST be documented in the plan’s Complexity Tracking with justification.
+- **Guidance**: Use feature specs, plan.md, and (when present) README or docs/quickstart.md for
+  runtime development guidance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-02-15 | **Last Amended**: 2026-02-15

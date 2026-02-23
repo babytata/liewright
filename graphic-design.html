@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graphic Design - Liewright</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #bdccd4;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #1c1c1c;
+            padding: 1rem 20px;
+            border-bottom: 2px solid #bbbdbf;
+        }
+        nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a.logo img {
+            height: 20px !important;
+            vertical-align: middle;
+        }
+        nav ul li a.logo {
+            padding: 0;
+        }
+        nav ul li a.logo:hover {
+            background-color: transparent;
+        }
+        .nav-carousel {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-items-container {
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+        }
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
+        }
+        nav ul.nav-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        nav ul.nav-items li {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+        nav ul li a {
+            color: #bdccd4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #bbbdbf;
+            color: #111;
+        }
+        .scroll-btn {
+            background: transparent;
+            border: none;
+            color: #bdccd4;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3;
+            padding: 0 10px;
+        }
+        .scroll-btn:hover {
+            color: #bbbdbf;
+        }
+        .scroll-btn.prev {
+            margin-right: 10px;
+        }
+        .scroll-btn.next {
+            margin-left: 10px;
+        }
+        h1 {
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #bbbdbf;
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        /* Netflix-style Gallery */
+        .gallery-section {
+            margin-bottom: 3rem;
+        }
+        .gallery-row {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .gallery-row-title {
+            font-size: 1.4rem;
+            color: #bbbdbf;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .gallery-container {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .gallery-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .gallery-container::-webkit-scrollbar-track {
+            background: #1c1c1c;
+        }
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+        .gallery-container::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+        .gallery-items {
+            display: flex;
+            gap: 15px;
+            padding: 0 10px;
+        }
+        .gallery-item {
+            flex-shrink: 0;
+            width: 280px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+        .gallery-thumbnail {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #1c1c1c;
+            border: 2px solid #333;
+            transition: border-color 0.3s ease;
+        }
+        .gallery-item:hover .gallery-thumbnail {
+            border-color: #bbbdbf;
+        }
+        .gallery-item-title {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #ccc;
+            text-align: center;
+        }
+
+        /* Ad Slot Styles */
+        .ad-slot .gallery-thumbnail {
+            background: #222;
+            border: 2px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .ad-slot:hover .gallery-thumbnail {
+            border-color: #666;
+            color: #888;
+        }
+
+        /* Footer Updates */
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .footer-col {
+            margin: 0 20px;
+            min-width: 120px;
+        }
+        .footer-col h4 {
+            color: #bbbdbf;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover {
+            color: #bbbdbf;
+        }
+        
+        /* Logo in footer */
+        .footer-logo-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px; 
+        }
+        .footer-logo-col img {
+            height: 25px !important;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .footer-logo-col img:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-carousel">
+                
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="graphic-design.html" class="active">Graphic Design</a></li>
+                        <li><a href="logo.html">Logo</a></li>
+                        <li><a href="illustration.html">Illustration</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Graphic Design</h1>
+        
+        <div class="gallery-section">
+            <div class="gallery-row">
+                <div class="gallery-row-title">Recent Work</div>
+                <div class="gallery-container">
+                    <div class="gallery-items">
+                        <div class="gallery-item">
+                            <a href="images/graphic-design/full/gd-001.jpg" target="_blank">
+                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Graphic Design Project 1" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Project 1</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="images/graphic-design/full/gd-002.jpg" target="_blank">
+                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Graphic Design Project 2" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Project 2</div>
+                        </div>
+
+                        <!-- Advertisement -->
+                        <div class="gallery-item">
+                            <a href="https://liewright.com/Dallies-Floral-Hand-&-Body-Wash-p605212100" target="_blank">
+                                <img src="Assets/Ad/Dallies.jpg" alt="Advertisement" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Sponsored</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="images/graphic-design/full/gd-003.jpg" target="_blank">
+                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Graphic Design Project 3" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Project 3</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="images/graphic-design/full/gd-004.jpg" target="_blank">
+                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Graphic Design Project 4" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Project 4</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="images/graphic-design/full/gd-005.jpg" target="_blank">
+                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Graphic Design Project 5" class="gallery-thumbnail">
+                            </a>
+                            <div class="gallery-item-title">Project 5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Liewright</h4>
+                <a href="/">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Collections</h4>
+                <a href="graphic-design.html">Graphic Design</a>
+                <a href="logo.html">Logo</a>
+                <a href="illustration.html">Illustration</a>
+                <a href="photography.html">Photography</a>
+            </div>
+            <div class="footer-col">
+                <h4>Network</h4>
+                <a href="projects.html">Archives</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="liewright-privacy-policy.html">Privacy Policy</a>
+            </div>
+             <div class="footer-col footer-logo-col">
+                <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Liewright — All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Nav Carousel Logic ---
+            const carousel = document.querySelector('.nav-carousel');
+            if (carousel) {
+                const navItems = carousel.querySelector('.nav-items');
+                if (navItems) {
+                    const items = navItems.querySelectorAll('li');
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+
+                    let trackPos = 0;
+                    let currentScrollSpeed = 0;
+                    let targetScrollSpeed = 0;
+                    let isNavMouseOver = false;
+                    let mouseX = 0;
+
+                    carousel.addEventListener('mouseenter', () => isNavMouseOver = true);
+                    carousel.addEventListener('mouseleave', () => {
+                        isNavMouseOver = false;
+                    });
+                    carousel.addEventListener('mousemove', (e) => {
+                        mouseX = e.clientX;
+                    });
+
+                    function navLoop() {
+                        if (isNavMouseOver) {
+                            const rect = carousel.getBoundingClientRect();
+                            const width = rect.width;
+                            const relativeX = mouseX - rect.left;
+                            
+                            const leftThreshold = width * 0.25;
+                            const rightThreshold = width * 0.75;
+                            const maxSpeed = 8;
+
+                            if (relativeX < leftThreshold) {
+                                const ratio = 1 - (relativeX / leftThreshold);
+                                targetScrollSpeed = -1 * maxSpeed * ratio;
+                            } else if (relativeX > rightThreshold) {
+                                const ratio = (relativeX - rightThreshold) / (width - rightThreshold);
+                                targetScrollSpeed = maxSpeed * ratio;
+                            } else {
+                                targetScrollSpeed = 0;
+                            }
+                        } else {
+                            targetScrollSpeed = 0;
+                        }
+
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.1;
+
+                        if (Math.abs(currentScrollSpeed) > 0.01) {
+                            trackPos += currentScrollSpeed;
+                            const scrollWidth = navItems.scrollWidth;
+                            const oneSetWidth = scrollWidth / 3;
+                            
+                            if (trackPos >= oneSetWidth) {
+                                trackPos = trackPos % oneSetWidth;
+                            } else if (trackPos < 0) {
+                                trackPos = oneSetWidth + (trackPos % oneSetWidth);
+                            }
+                            
+                            navItems.style.transform = `translateX(-${trackPos}px)`;
+                        }
+
+                        requestAnimationFrame(navLoop);
+                    }
+                    navLoop();
+                }
+            }
+            
+        });
+    </script>
+</body>
+</html>

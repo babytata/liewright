@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Liewright</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #bdccd4;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #1c1c1c;
+            padding: 1rem 20px;
+            border-bottom: 2px solid #bbbdbf;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a.logo img {
+            height: 20px !important;
+            vertical-align: middle;
+        }
+
+        nav ul li a.logo {
+            padding: 0;
+        }
+
+        nav ul li a.logo:hover {
+            background-color: transparent;
+        }
+
+        /* Carousel Styles */
+        .nav-carousel {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-items-container {
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
+        }
+
+        nav ul.nav-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        nav ul.nav-items li {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+
+        nav ul li a {
+            color: #bdccd4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #bbbdbf;
+            color: #111;
+        }
+
+        .scroll-btn {
+            background: transparent;
+            border: none;
+            color: #bdccd4;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3;
+            padding: 0 10px;
+        }
+
+        .scroll-btn:hover {
+            color: #bbbdbf;
+        }
+
+        .scroll-btn.prev {
+            margin-right: 10px;
+        }
+
+        .scroll-btn.next {
+            margin-left: 10px;
+        }
+
+
+        /* --- NEW HERO GRID STYLES --- */
+        #hero-section {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            /* Increased height for more rows */
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 5vh;
+            background: #111;
+            margin-top: 2rem;
+            /* Mask edges for a clean fade look */
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            cursor: crosshair;
+            /* Optional hint */
+        }
+
+        #hero-track {
+            display: flex;
+            gap: 2vw;
+            will-change: transform;
+            padding: 0 5vw;
+        }
+
+        .hero-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* keep horizontal center */
+            justify-content: flex-start;
+            /* start from the top */
+            user-select: none;
+        }
+
+        .hero-char {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.1;
+            color: #333;
+            transition: opacity 0.1s, transform 0.1s, color 0.1s;
+            cursor: default;
+        }
+
+        .hero-char.header-char {
+            color: #f0f0f0;
+            /* White header */
+            margin-bottom: 10px;
+            font-size: 2rem;
+            position: relative;
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        /* Fillers are now visible by default (grey), fading to black on hover */
+        .hero-char.filler-char {
+            color: #444;
+            /* Visible grey */
+            opacity: 1;
+        }
+
+        /* Tooltip */
+        .hero-char.header-char .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: rgba(20, 20, 20, 0.95);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85rem;
+            font-weight: 400;
+            border: 1px solid #444;
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-char.header-char:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Footer Updates */
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .footer-col {
+            margin: 0 20px;
+            min-width: 120px;
+        }
+
+        .footer-col h4 {
+            color: #bbbdbf;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #bbbdbf;
+        }
+
+        /* Logo in footer */
+        .footer-logo-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px;
+        }
+
+        .footer-logo-col img {
+            height: 25px !important;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-logo-col img:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-carousel">
+
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="graphic-design.html">Graphic Design</a></li>
+                        <li><a href="logo.html">Logo</a></li>
+                        <li><a href="illustration.html">Illustration</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- New Hero Section -->
+    <div id="hero-section">
+        <div id="hero-track">
+            <!-- Content generated by JS -->
+        </div>
+    </div>
+
+    <!-- Instruction Text Removed as requested -->
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Liewright</h4>
+                <a href="/">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Collections</h4>
+                <a href="graphic-design.html">Graphic Design</a>
+                <a href="logo.html">Logo</a>
+                <a href="illustration.html">Illustration</a>
+                <a href="photography.html">Photography</a>
+            </div>
+            <div class="footer-col">
+                <h4>Network</h4>
+                <a href="projects.html">Archives</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="liewright-privacy-policy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-col footer-logo-col">
+                <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Liewright — All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Nav Carousel Logic ---
+            const carousel = document.querySelector('.nav-carousel');
+            if (carousel) {
+                const navItems = carousel.querySelector('.nav-items');
+                if (navItems) {
+                    const items = navItems.querySelectorAll('li');
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+
+                    let trackPos = 0;
+                    let currentScrollSpeed = 0;
+                    let targetScrollSpeed = 0;
+                    let isNavMouseOver = false;
+                    let mouseX = 0;
+
+                    carousel.addEventListener('mouseenter', () => isNavMouseOver = true);
+                    carousel.addEventListener('mouseleave', () => {
+                        isNavMouseOver = false;
+                    });
+                    carousel.addEventListener('mousemove', (e) => {
+                        mouseX = e.clientX;
+                    });
+
+                    function navLoop() {
+                        if (isNavMouseOver) {
+                            const rect = carousel.getBoundingClientRect();
+                            const width = rect.width;
+                            const relativeX = mouseX - rect.left;
+
+                            const leftThreshold = width * 0.25;
+                            const rightThreshold = width * 0.75;
+                            const maxSpeed = 8;
+
+                            if (relativeX < leftThreshold) {
+                                const ratio = 1 - (relativeX / leftThreshold);
+                                targetScrollSpeed = -1 * maxSpeed * ratio;
+                            } else if (relativeX > rightThreshold) {
+                                const ratio = (relativeX - rightThreshold) / (width - rightThreshold);
+                                targetScrollSpeed = maxSpeed * ratio;
+                            } else {
+                                targetScrollSpeed = 0;
+                            }
+                        } else {
+                            targetScrollSpeed = 0;
+                        }
+
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.1;
+
+                        if (Math.abs(currentScrollSpeed) > 0.01) {
+                            trackPos += currentScrollSpeed;
+                            const scrollWidth = navItems.scrollWidth;
+                            const oneSetWidth = scrollWidth / 3;
+
+                            if (trackPos >= oneSetWidth) {
+                                trackPos = trackPos % oneSetWidth;
+                            } else if (trackPos < 0) {
+                                trackPos = oneSetWidth + (trackPos % oneSetWidth);
+                            }
+
+                            navItems.style.transform = `translateX(-${trackPos}px)`;
+                        }
+
+                        requestAnimationFrame(navLoop);
+                    }
+                    navLoop();
+                }
+            }
+            // --- Hero Grid Logic ---
+            const heroTrack = document.getElementById('hero-track');
+            const heroSection = document.getElementById('hero-section');
+            const baseString = "GRAPHICDESIGNLOGOILLUSTRATIONPHOTOGRAPHYART";
+            // Sentences for tooltips
+            const sentences = [
+                "Design is the silent ambassador of your brand.",
+                "Simplicity is the ultimate sophistication.",
+                "Good design is obvious. Great design is transparent.",
+                "Digital design is like painting, except the paint never dries.",
+                "Creativity is intelligence having fun.",
+                "The details are not the details. They make the design.",
+                "Design is not just what it looks like and feels like. Design is how it works.",
+                "Every great design begins with an even better story.",
+                "White space is to be regarded as an active element, not a passive background.",
+                "Styles come and go. Good design is a language, not a style.",
+                "Design adds value faster than it adds costs.",
+                "Accessible design is good design.",
+                "A logo doesn’t sell (directly), it identifies.",
+                "Designing creates culture. Culture shapes values.",
+                "Logic will get you from A to B. Imagination will take you everywhere.",
+                "Design is thinking made visual.",
+                "Color does not add a pleasant quality to design - it reinforces it.",
+                "Good design is honest.",
+                "Make it simple, but significant.",
+                "Design creates emotion.",
+                "Typography is the voice of your design.",
+                "Simplicity is subtracting the obvious and adding the meaningful.",
+                "Design dictates where your eye should go.",
+                "Content precedes design. Design in the absence of content is not design, it’s decoration.",
+                "Good design is sustainable.",
+                "Recognize the need is the primary condition for design.",
+                "Constraint inspires creativity.",
+                "The public is more familiar with bad design than good design.",
+                "Design creates a relationship between the product and the user.",
+                "Design is the intermediary between information and understanding.",
+                "Confusion and clutter are the failure of design, not the attributes of information.",
+                "Great design is eliminating all unnecessary details.",
+                "Design involves as much psychology as it does art.",
+                "Visuals express what words cannot.",
+                "Design is where science and art break even.",
+                "A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.",
+                "Design focuses on the user experience.",
+                "Art challenges the technology, and the technology inspires the art.",
+                "Design is a solution to a problem.",
+                "Bad design is smoke, while good design is a mirror.",
+                "Design is intelligence made visible.",
+                "The alternative to good design is always bad design.",
+                "Everything is designed. Few things are designed well."
+            ];
+
+            // Build the grid
+            const repeatedString = baseString.repeat(4);
+            const totalChars = repeatedString.length;
+
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 0; i < totalChars; i++) {
+                const char = repeatedString[i];
+                const col = document.createElement('div');
+                col.className = 'hero-col';
+                // Assign index for lookup
+                col.dataset.index = i;
+
+                // Header char (top row)
+                const headerSpan = document.createElement('span');
+                headerSpan.textContent = char;
+                headerSpan.className = 'hero-char header-char';
+
+                // Tooltip
+                const tooltipInfo = document.createElement('span');
+                tooltipInfo.className = 'tooltip-text';
+                tooltipInfo.textContent = sentences[i % sentences.length];
+                headerSpan.appendChild(tooltipInfo);
+
+                col.appendChild(headerSpan);
+
+                // Filler chars (vertical repetition)
+                // INCREASED to 24 rows
+                for (let r = 0; r < 24; r++) {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.className = 'hero-char filler-char';
+                    // Style handles opacity now (default 1)
+                    col.appendChild(span);
+                }
+                fragment.appendChild(col);
+            }
+            heroTrack.appendChild(fragment);
+
+            // --- Cache Metrics ---
+            let colWidth = 0;
+            const allCols = Array.from(document.querySelectorAll('.hero-col'));
+
+            function updateMetrics() {
+                if (allCols.length > 1) {
+                    const r1 = allCols[0].getBoundingClientRect();
+                    const r2 = allCols[1].getBoundingClientRect();
+                    colWidth = r2.left - r1.left;
+                    if (colWidth === 0) colWidth = 40;
+                }
+            }
+            updateMetrics();
+            window.addEventListener('resize', updateMetrics);
+
+
+            // --- Edge Scrolling & Hover Logic ---
+            let trackPos = 0;
+            let targetScrollSpeed = 0;
+            let currentScrollSpeed = 0;
+            let animationFrameId;
+
+            // Throttling for hover effect
+            let lastFrameTime = 0;
+            const targetFPS = 30;
+            const frameDelay = 1000 / targetFPS;
+
+            // Mouse tracking
+            let mouseX = 0;
+            let mouseY = 0;
+            let isMouseOver = false;
+
+            // State for reverse hole effect
+            let activeIndices = new Set();
+
+            function resetHighlights() {
+                activeIndices.forEach(index => {
+                    const col = allCols[index];
+                    if (col) {
+                        const chars = col.querySelectorAll('.filler-char');
+                        chars.forEach(char => {
+                            // Reset to defaultCSS
+                            char.style.opacity = '';
+                            char.style.transform = '';
+                        });
+                    }
+                });
+                activeIndices.clear();
+            }
+
+            // Helper to get scroll speed from edge distance
+            function getScrollSpeedFromMouse() {
+                if (!isMouseOver) return 0;
+
+                const width = window.innerWidth;
+                const leftThreshold = width * 0.15;
+                const rightThreshold = width * 0.85;
+                const maxSpeed = 8; // Faster scroll for edges
+
+                if (mouseX < leftThreshold) {
+                    // Normalize distance from edge (0 to 1)
+                    const ratio = 1 - (mouseX / leftThreshold);
+                    return -1 * maxSpeed * ratio; // Move Left (track moves right? No, track moves left to see right)
+                    // Actually trackPos += speed. 
+                    // Pos increasing = track moves Left.
+                    // If mouse is left, we want to see left content -> track moves Right -> Pos decreasing.
+                    // So return negative speed.
+                } else if (mouseX > rightThreshold) {
+                    const ratio = (mouseX - rightThreshold) / (width - rightThreshold);
+                    return maxSpeed * ratio; // Move Right -> Pos increasing
+                }
+                return 0;
+            }
+
+            // Main Loop
+            function loop() {
+                const now = performance.now();
+
+                // 1. Handle Scrolling (Smooth ease-in/out)
+                targetScrollSpeed = getScrollSpeedFromMouse();
+                // Lerp current speed
+                currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.1;
+
+                if (Math.abs(currentScrollSpeed) > 0.01) {
+                    trackPos += currentScrollSpeed;
+                    const trackWidth = heroTrack.scrollWidth;
+
+                    // Infinite wrap
+                    if (trackPos >= trackWidth / 2) {
+                        trackPos = 0; // Or trackPos -= (trackWidth/2) for smoothness
+                        // Better:
+                        trackPos = trackPos % (trackWidth / 2);
+                    } else if (trackPos < 0) {
+                        // Wrap to end
+                        trackPos = (trackWidth / 2) + trackPos;
+                    }
+
+                    heroTrack.style.transform = `translateX(-${trackPos}px)`;
+                }
+
+                // 2. Handle Flashlight (Reverse Hover)
+                // Only update at 30fps
+                if (now - lastFrameTime >= frameDelay && isMouseOver) {
+                    lastFrameTime = now;
+
+                    const trackRect = heroTrack.getBoundingClientRect();
+                    const relativeX = mouseX - trackRect.left;
+
+                    let centerIndex = Math.floor(relativeX / colWidth);
+                    if (centerIndex < 0) centerIndex = 0;
+                    if (centerIndex >= allCols.length) centerIndex = allCols.length - 1;
+
+                    const range = 5; // Larger range for smoother gradient
+                    const startIndex = Math.max(0, centerIndex - range);
+                    const endIndex = Math.min(allCols.length - 1, centerIndex + range);
+
+                    const newIndices = new Set();
+                    for (let i = startIndex; i <= endIndex; i++) {
+                        newIndices.add(i);
+                    }
+
+                    // Reset old
+                    activeIndices.forEach(i => {
+                        if (!newIndices.has(i)) {
+                            const col = allCols[i];
+                            if (col) {
+                                const chars = col.querySelectorAll('.filler-char');
+                                chars.forEach(char => {
+                                    char.style.opacity = '';
+                                    char.style.transform = '';
+                                });
+                            }
+                        }
+                    });
+
+                    // Update new
+                    newIndices.forEach(i => {
+                        const col = allCols[i];
+                        if (!col) return;
+
+                        const colCenterX = trackRect.left + (i * colWidth) + (colWidth / 2);
+
+                        // We iterate only filler chars to get vertical dist so headers remain unaffected
+                        const chars = col.querySelectorAll('.filler-char');
+                        chars.forEach(char => {
+                            const rect = char.getBoundingClientRect();
+                            const charCenterX = rect.left + rect.width / 2;
+                            const charCenterY = rect.top + rect.height / 2;
+
+                            const dist = Math.hypot(mouseX - charCenterX, mouseY - charCenterY);
+                            // "Black Hole" Radius
+                            const radius = 300;
+
+                            if (dist < radius) {
+                                const intensity = 1 - (dist / radius); // 1 = center, 0 = edge
+
+                                // REVERSE: Intensity high -> Opacity low
+                                // Min opacity 0 (invisible), Max opacity 1
+                                const opacity = 1 - intensity;
+
+                                // Header chars might want to stay visible? 
+                                // User said: "as I hover the letters, it fades from white to black". 
+                                // Implies everything fades.
+                                // BUT header has timestamps? No, tooltips.
+                                // If header disappears, can't hover on it?
+                                // Tooltip is on parent header-char. If opacity is 0, it's invisible but present.
+
+                                // Let's fade them all.
+                                char.style.opacity = opacity.toFixed(2);
+
+                                // Optional: Scale down slightly?
+                                char.style.transform = `scale(${1 - intensity * 0.1})`;
+                            } else {
+                                char.style.opacity = '';
+                                char.style.transform = '';
+                            }
+                        });
+                    });
+                    activeIndices = newIndices;
+                }
+
+                animationFrameId = requestAnimationFrame(loop);
+            }
+            loop(); // Start loop
+
+            // Global mouse listeners for smoother tracking
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Only toggle isMouseOver when inside the hero section for scroll purposes?
+            // "if the user gets to close to the edge, the effect would move"
+            // Usually valid for the whole page width, but maybe only when Y is within hero?
+            // Let's restrict to hero section Y-axis roughly, or just check if mouse is inside hero element.
+
+            heroSection.addEventListener('mouseenter', () => isMouseOver = true);
+            heroSection.addEventListener('mouseleave', () => {
+                isMouseOver = false;
+                resetHighlights();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
