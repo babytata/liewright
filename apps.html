@@ -303,7 +303,9 @@
                             
                             const leftThreshold = width * 0.25;
                             const rightThreshold = width * 0.75;
-                            const maxSpeed = 8;
+                            
+                            // ⬇️ Reduced from 8 to 3 to make scrolling slower and less erratic
+                            const maxSpeed = 3; 
 
                             if (relativeX < leftThreshold) {
                                 const ratio = 1 - (relativeX / leftThreshold);
@@ -318,7 +320,8 @@
                             targetScrollSpeed = 0;
                         }
 
-                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.1;
+                        // ⬇️ Reduced multiplier from 0.1 to 0.05 for smoother ease-in/ease-out acceleration
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.05;
 
                         if (Math.abs(currentScrollSpeed) > 0.01) {
                             trackPos += currentScrollSpeed;
@@ -339,11 +342,6 @@
                     navLoop();
                 }
             }
-            
-
-            // Optional: Auto-scroll
-            // setInterval(() => scroll(1), 3000);
-        });
-    </script>
+            </script>
 </body>
 </html>
