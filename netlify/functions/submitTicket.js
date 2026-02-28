@@ -9,10 +9,10 @@ exports.handler = async (event, context) => {
     try {
         const data = JSON.parse(event.body);
 
-        const { name, email, message } = data;
+        const { first_name, last_name, email, device_version, message } = data;
 
         // Validate inputs
-        if (!name || !email || !message) {
+        if (!first_name || !last_name || !email || !message) {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ error: "Missing required fields" }),
@@ -35,9 +35,11 @@ exports.handler = async (event, context) => {
                 records: [
                     {
                         fields: {
-                            Name: name,
-                            Email: email,
-                            Message: message,
+                            "first_name": first_name,
+                            "last_name": last_name,
+                            "Email": email,
+                            "Device / Version": device_version || "",
+                            "Message": message,
                             // You can add a 'Status' field like "Todo" if that exists in your table
                             // Status: "Todo",
                         },
