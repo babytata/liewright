@@ -73,7 +73,7 @@
             font-size: 1.5rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
-            color: var(--secondary);
+            color: rgba(248, 249, 252, 0.8);
         }
 
         p {
@@ -91,12 +91,57 @@
             margin-bottom: 0.5rem;
         }
 
-        .footer-bottom {
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid var(--border);
             text-align: center;
-            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--light);
+            margin-top: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(248, 249, 252, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
             border-top: 1px solid var(--border);
             color: rgba(248, 249, 252, 0.5);
-            margin-top: 4rem;
+            text-align: center;
         }
 
         @media (max-width: 768px) {
@@ -108,17 +153,23 @@
                 margin: 2rem 1rem;
                 padding: 1.5rem;
             }
+
+            .footer-content {
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <a href="youtwo-landing.html" class="logo">YouTwo</a>
+        <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <a href="youtwo-landing.html" class="logo">YouTwo</a>
+            <h1 style="margin: 0;">Privacy Policy</h1>
+        </div>
     </nav>
 
     <div class="container">
-        <h1>Privacy Policy</h1>
         <p><strong>Last Updated:</strong> February 2026</p>
 
         <p>At YouTwo, your privacy is our priority. We believe that your notes are your personal space. This policy
@@ -161,9 +212,52 @@
             our support channels.</p>
     </div>
 
-    <div class="footer-bottom">
-        <p>&copy; 2026 YouTwo. Built with intention for people who think deeply.</p>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul class="footer-links">
+                    <li><a href="youtwo-landing.html#features">Features</a></li>
+                    <li><a href="youtwo-landing.html#use-cases">Use Cases</a></li>
+                    <li><a href="youtwo-landing.html#download">Download</a></li>
+                    <li><a href="youtwo-landing.html#pricing">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="youtwo-landing.html#about">About</a></li>
+                    <li><a href="youtwo-landing.html#blog">Blog</a></li>
+                    <li><a href="youtwo-landing.html#press">Press Kit</a></li>
+                    <li><a href="youtwo-landing.html#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="youtwo-support.html">Contact Support</a></li>
+                    <li><a href="youtwo-landing.html#help">Help Center</a></li>
+                    <li><a href="youtwo-landing.html#docs">Documentation</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="youtwo-privacy-policy.html">Privacy</a></li>
+                    <li><a href="youtwo-landing.html#terms">Terms</a></li>
+                    <li><a href="youtwo-landing.html#security">Security</a></li>
+                    <li><a href="youtwo-landing.html#cookies">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 YouTwo. Built with intention for people who think deeply.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
