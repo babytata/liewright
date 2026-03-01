@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - YouTwo</title>
+    <title>Pricing - YouTwo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -31,6 +31,9 @@
             background: var(--dark);
             color: var(--light);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         nav {
@@ -56,39 +59,57 @@
         .container {
             max-width: 800px;
             margin: 4rem auto;
-            padding: 2rem;
+            flex: 1;
+            padding: 3rem;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
             border-radius: 16px;
+            text-align: center;
         }
 
         h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--light);
         }
 
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: rgba(248, 249, 252, 0.8);
+        .price {
+            font-family: 'DM Serif Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         p {
             color: rgba(248, 249, 252, 0.8);
-            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.8;
         }
 
-        ul {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            color: rgba(248, 249, 252, 0.8);
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        li {
-            margin-bottom: 0.5rem;
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
         }
 
         /* Footer */
@@ -96,7 +117,7 @@
             padding: 4rem;
             border-top: 1px solid var(--border);
             text-align: center;
-            margin-top: 4rem;
+            margin-top: auto;
         }
 
         .footer-content {
@@ -151,7 +172,7 @@
 
             .container {
                 margin: 2rem 1rem;
-                padding: 1.5rem;
+                padding: 2rem;
             }
 
             .footer-content {
@@ -165,51 +186,17 @@
     <nav>
         <div style="display: flex; align-items: baseline; gap: 1.5rem;">
             <a href="youtwo-landing.html" class="logo">YouTwo</a>
-            <h1 style="margin: 0;">Privacy Policy</h1>
         </div>
     </nav>
 
     <div class="container">
-        <p><strong>Last Updated:</strong> February 2026</p>
+        <h1>Simple, Transparent Pricing</h1>
+        <div class="price">$0.99</div>
+        <p>One-time purchase.</p>
+        <p>This minimal price primarily helps cover our operating costs and server fees, allowing us to keep YouTwo
+            fast, ad-free, and continuously updated for you.</p>
 
-        <p>At YouTwo, your privacy is our priority. We believe that your notes are your personal space. This policy
-            outlines our approach to data collection and privacy for the YouTwo iOS app and our website.</p>
-
-        <h2>1. Data Collection in the YouTwo App</h2>
-        <p>The YouTwo app is designed to be a private, local-first note-taking experience.</p>
-        <ul>
-            <li><strong>We do not collect personal information.</strong> We do not require you to create an account, nor
-                do we track your notes, ideas, or personal usage within the app.</li>
-            <li><strong>Your data stays with you.</strong> All notes created in YouTwo are saved locally on your device.
-            </li>
-            <li><strong>iCloud Syncing.</strong> If you choose to enable iCloud sync, your notes are synced across your
-                devices using Apple's iCloud services. This data is managed directly by Apple, and YouTwo does not have
-                access to it or store it on any third-party servers. Please refer to Apple's Privacy Policy for more
-                details on how iCloud secures your data.</li>
-        </ul>
-
-        <h2>2. Data Collection on the YouTwo Website</h2>
-        <p>Our website (where you download or learn about the app) may collect some basic data to help us improve the
-            user experience:</p>
-        <ul>
-            <li><strong>Analytics:</strong> We may use basic, anonymized analytics to understand how people find and
-                navigate our website. This does not include any information that can personally identify you.</li>
-            <li><strong>Cookies:</strong> Our website may use cookies to ensure it functions properly and to improve
-                your browsing experience.</li>
-        </ul>
-
-        <h2>3. Third-Party Services</h2>
-        <p>The YouTwo app does not use third-party tracking, analytics, or advertising SDKs. The app is completely
-            ad-free and tracking-free.</p>
-
-        <h2>4. Changes to This Policy</h2>
-        <p>If we ever decide to change our privacy policy in the future (for example, if we introduce new features that
-            require a different approach), we will update this page. Since we don't hold your email address, we cannot
-            notify you directly, so we encourage you to review this page periodically.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy or how your data is handled, please reach out to us via
-            our support channels.</p>
+        <a href="youtwo-landing.html#download" class="cta-button">Get YouTwo</a>
     </div>
 
     <footer>
