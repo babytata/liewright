@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,16 +14,19 @@
             padding: 0;
             line-height: 1.6;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
+
         header {
             background: #1c1c1c;
             padding: 1rem 20px;
             border-bottom: 2px solid #bbbdbf;
         }
+
         nav {
             max-width: 900px;
             margin: 0 auto;
@@ -30,16 +34,20 @@
             justify-content: space-between;
             align-items: center;
         }
+
         nav a.logo img {
             height: 20px !important;
             vertical-align: middle;
         }
+
         nav ul li a.logo {
             padding: 0;
         }
+
         nav ul li a.logo:hover {
             background-color: transparent;
         }
+
         .nav-carousel {
             display: flex;
             align-items: center;
@@ -47,11 +55,13 @@
             position: relative;
             overflow: hidden;
         }
+
         .nav-items-container {
             overflow: hidden;
             flex-grow: 1;
             position: relative;
         }
+
         .nav-items-container::before,
         .nav-items-container::after {
             content: '';
@@ -62,14 +72,17 @@
             z-index: 2;
             pointer-events: none;
         }
+
         .nav-items-container::before {
             left: 0;
             background: linear-gradient(to right, #1c1c1c, transparent);
         }
+
         .nav-items-container::after {
             right: 0;
             background: linear-gradient(to left, #1c1c1c, transparent);
         }
+
         nav ul.nav-items {
             list-style: none;
             margin: 0;
@@ -78,10 +91,12 @@
             align-items: center;
             transition: transform 0.5s ease;
         }
+
         nav ul.nav-items li {
             margin: 0 15px;
             flex-shrink: 0;
         }
+
         nav ul li a {
             color: #bdccd4;
             text-decoration: none;
@@ -92,10 +107,13 @@
             display: block;
             white-space: nowrap;
         }
-        nav ul li a:hover, nav ul li a.active {
+
+        nav ul li a:hover,
+        nav ul li a.active {
             background-color: #bbbdbf;
             color: #111;
         }
+
         .scroll-btn {
             background: transparent;
             border: none;
@@ -105,15 +123,19 @@
             z-index: 3;
             padding: 0 10px;
         }
+
         .scroll-btn:hover {
             color: #bbbdbf;
         }
+
         .scroll-btn.prev {
             margin-right: 10px;
         }
+
         .scroll-btn.next {
             margin-left: 10px;
         }
+
         h1 {
             font-size: 2.8rem;
             letter-spacing: 1px;
@@ -123,15 +145,18 @@
             margin-top: 2rem;
             margin-bottom: 0.5rem;
         }
+
         .about-content {
             max-width: 700px;
             margin: 2rem auto;
             font-size: 1.1rem;
             line-height: 1.8;
         }
+
         .about-content p {
             margin-bottom: 1.5rem;
         }
+
         /* Footer Updates */
         footer {
             margin-top: 3rem;
@@ -141,7 +166,7 @@
             border-top: 1px solid #333;
             padding: 40px 20px;
         }
-        
+
         .footer-content {
             max-width: 900px;
             margin: 0 auto 30px auto;
@@ -156,11 +181,13 @@
             margin: 0 20px;
             min-width: 120px;
         }
+
         .footer-col h4 {
             color: #bbbdbf;
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
+
         .footer-col a {
             color: #ccc;
             text-decoration: none;
@@ -168,23 +195,26 @@
             margin-bottom: 5px;
             transition: color 0.3s;
         }
+
         .footer-col a:hover {
             color: #bbbdbf;
         }
-        
+
         /* Logo in footer */
         .footer-logo-col {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
-            padding-top: 10px; 
+            padding-top: 10px;
         }
+
         .footer-logo-col img {
             height: 25px !important;
             opacity: 0.7;
             transition: opacity 0.3s;
         }
+
         .footer-logo-col img:hover {
             opacity: 1;
         }
@@ -199,11 +229,12 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav>
             <div class="nav-carousel">
-                
+
                 <div class="nav-items-container">
                     <ul class="nav-items">
                         <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
@@ -216,7 +247,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
             </div>
         </nav>
     </header>
@@ -225,16 +256,24 @@
         <h1>About Us</h1>
         <div class="about-content">
             <p>
-                <strong>Liewright</strong> is a creative studio born from the intersection of raw talent and real-life experience. Our work is unapologetic, deeply rooted in authenticity, and driven by a philosophy that craftsmanship matters in all forms.
+                <strong>Liewright</strong> is a creative studio born from the intersection of raw talent and real-life
+                experience. Our work is unapologetic, deeply rooted in authenticity, and driven by a philosophy that
+                craftsmanship matters in all forms.
             </p>
             <p>
-                From urban-inspired apparel to fine art, we're not just making products—we're building a body of work that tells a story of perseverance, creativity, and the relentless pursuit of excellence.
+                From urban-inspired apparel to fine art, we're not just making products—we're building a body of work
+                that tells a story of perseverance, creativity, and the relentless pursuit of excellence.
             </p>
             <p>
-                We believe design is the language that shapes how the world sees our ideas. Every project, whether it's graphic design, logo creation, illustration, photography, or art, carries the same commitment to quality and vision.
+                We believe design is the language that shapes how the world sees our ideas. Every project, whether it's
+                graphic design, logo creation, illustration, photography, or art, carries the same commitment to quality
+                and vision.
             </p>
             <p>
-                Alongside our creative work, we provide hands-on services that reflect our core philosophy: where grit meets design.
+                Alongside our creative work, we provide hands-on services that reflect our core philosophy: where grit
+                meets design. <a href="contact.html"
+                    style="color: #bbbdbf; font-weight: bold; text-decoration: underline;">Contact us to get
+                    started.</a>
             </p>
             <p><strong>Welcome to Liewright.</strong></p>
         </div>
@@ -263,7 +302,7 @@
                 <h4>Legal</h4>
                 <a href="liewright-privacy-policy.html">Privacy Policy</a>
             </div>
-             <div class="footer-col footer-logo-col">
+            <div class="footer-col footer-logo-col">
                 <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
             </div>
         </div>
@@ -272,15 +311,15 @@
         </div>
     </footer>
 
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
             // --- Nav Carousel Logic ---
             const carousel = document.querySelector(".nav-carousel");
             if (carousel) {
                 const navItems = carousel.querySelector(".nav-items");
                 if (navItems) {
                     const items = navItems.querySelectorAll("li");
-                    
+
                     if (items.length > 0) {
                         // Clone items for infinite scroll
                         items.forEach(item => navItems.appendChild(item.cloneNode(true)));
@@ -306,10 +345,10 @@
                             const rect = carousel.getBoundingClientRect();
                             const width = rect.width;
                             const relativeX = mouseX - rect.left;
-                            
+
                             const leftThreshold = width * 0.25;
                             const rightThreshold = width * 0.75;
-                            const maxSpeed = 3; 
+                            const maxSpeed = 3;
 
                             if (relativeX < leftThreshold) {
                                 const ratio = 1 - (relativeX / leftThreshold);
@@ -330,13 +369,13 @@
                             trackPos += currentScrollSpeed;
                             const scrollWidth = navItems.scrollWidth;
                             const singleSetWidth = scrollWidth / 3;
-                            
+
                             if (trackPos >= singleSetWidth) {
                                 trackPos -= singleSetWidth;
                             } else if (trackPos < 0) {
                                 trackPos += singleSetWidth;
                             }
-                            
+
                             navItems.style.transform = `translateX(-${trackPos}px)`;
                         }
 
@@ -348,4 +387,5 @@
         });
     </script>
 </body>
+
 </html>
