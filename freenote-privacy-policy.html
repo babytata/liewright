@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freenote Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07090b; --bg-card: rgba(20, 24, 32, 0.6); --accent-primary: #10b981;
+            --accent-secondary: #6366f1; --accent-glow: rgba(16, 185, 129, 0.2);
+            --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --border-light: rgba(255, 255, 255, 0.08); --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        
+        /* Standard Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(24px); background: rgba(7, 9, 11, 0.7); border-bottom: 1px solid var(--border-light); }
+        .logo { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 6px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-primary); }
+        .cta-btn { padding: 0.6rem 1.25rem; background: var(--text-primary); color: var(--bg-dark); border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+        
+        .ambient-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.05) 0%, transparent 50%); filter: blur(80px); }
+
+        /* Legal Content Styling */
+        .legal-header { padding: 10rem 0 4rem; text-align: center; border-bottom: 1px solid var(--border-light); }
+        .legal-header h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 1rem; }
+        .legal-header p { color: var(--text-secondary); font-size: 1.1rem; }
+        
+        .legal-content { max-width: 800px; margin: 0 auto; padding: 4rem 2rem 8rem; }
+        .legal-content h2 { font-size: 1.8rem; margin: 3rem 0 1rem; color: var(--text-primary); }
+        .legal-content p, .legal-content li { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.8; }
+        .legal-content ul { margin-left: 1.5rem; margin-bottom: 2rem; }
+        .legal-content .highlight-box { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .legal-content .highlight-box h3 { color: var(--accent-primary); margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .legal-content .highlight-box p { margin-bottom: 0; }
+
+        /* Footer */
+        footer { margin-top: auto; background: rgba(7, 9, 11, 0.9); border-top: 1px solid var(--border-light); padding: 4rem 0 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid .col-brand { grid-column: 1 / -1; } }
+        .footer-col h3 { font-family: 'Outfit', sans-serif; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 600; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; }
+        .footer-bottom { border-top: 1px solid var(--border-light); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+
+    <nav>
+        <a href="freenote-landing.html" class="logo"><div class="logo-icon"></div>freenote</a>
+        <ul class="nav-links">
+            <li><a href="freenote-landing.html#how-it-works">How it Works</a></li>
+            <li><a href="freenote-landing.html#features">Features</a></li>
+            <li><a href="freenote-pricing.html">Pricing</a></li>
+        </ul>
+        <a href="freenote-pricing.html" class="cta-btn">Get freenote</a>
+    </nav>
+
+    <header class="legal-header">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: March 2026</p>
+        </div>
+    </header>
+
+    <main class="legal-content">
+        <div class="highlight-box">
+            <h3>TL;DR</h3>
+            <p>Your notes and tasks belong to you. Freenote does not collect, read, or monetize your personal context. The app runs locally on your device, and sync data is stored securely in your private iCloud account.</p>
+        </div>
+
+        <h2>1. Principles of Privacy Validation</h2>
+        <p>Because Freenote is an app designed to act as your "second brain" and hold your deepest context, we believe it must be foundationally private. We have built Freenote so that we are physically incapable of reading your notes or your action items.</p>
+
+        <h2>2. Data Collection & Usage</h2>
+        <p>We do not collect personal data from your use of the Freenote app. Specifically:</p>
+        <ul>
+            <li><strong>Note Content:</strong> All text, markup, and tasks you create reside locally on your device's storage. Freenote does not transmit note content to any servers owned by Liewright.</li>
+            <li><strong>Analytics:</strong> We optionally collect anonymous crash reports to help us fix bugs (if you opt-in via your device settings). This data contains no recognizable user information.</li>
+            <li><strong>Accounts:</strong> We do not require you to create an account with us. Your data is tied to your Apple ID / iCloud account.</li>
+        </ul>
+
+        <h2>3. iCloud Synchronization</h2>
+        <p>If you choose to use Freenote across multiple devices, the app utilizes Apple's CloudKit (iCloud) framework to synchronize your database.</p>
+        <p>This means your files are uploaded directly to the private iCloud storage allocated to your Apple ID. We have no access to your iCloud container. Apple's privacy policy governs how data is secured on their servers.</p>
+
+        <h2>4. Third-Party Integrations</h2>
+        <p>Freenote is completely standalone. It does not contain integrating trackers (like Facebook Pixel or Google Analytics) within the application interface itself.</p>
+        <p>On this promotional website, we may use standard server logs or privacy-conscious website analytics to understand general visitor counts, but we do not track individual user behavior.</p>
+
+        <h2>5. Changes to this Policy</h2>
+        <p>As Freenote evolves, we may update this policy (for instance, if we add optional collaborative features later). If we make significant changes, we will notify users through the application interface prior to those changes taking effect.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions regarding this privacy policy or how your data is handled, please visit our <a href="freenote-support.html" style="color: var(--accent-primary);">Support page</a> to contact us directly.</p>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col col-brand">
+                    <a href="freenote-landing.html" class="logo" style="margin-bottom: 1rem;"><div class="logo-icon"></div>freenote</a>
+                    <p style="color: var(--text-secondary); max-width: 300px; font-size: 0.95rem;">The productivity app that turns ideas into action.</p>
+                </div>
+                <!-- Standard Footer links -->
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <ul class="footer-links"><li><a href="freenote-landing.html#features">Features</a></li><li><a href="freenote-landing.html#how-it-works">How it works</a></li><li><a href="freenote-pricing.html">Pricing</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links"><li><a href="#">About</a></li><li><a href="freenote-support.html">Contact</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links"><li><a href="freenote-privacy-policy.html">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Liewright. All rights reserved.</p></div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freenote - Notes and Tasks, finally in the same place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Freenote Theme Colors: Emerald & Indigo on Dark */
+            --bg-dark: #07090b;
+            --bg-card: rgba(20, 24, 32, 0.6);
+            --bg-elevated: rgba(30, 36, 48, 0.8);
+            
+            --accent-primary: #10b981; /* Emerald */
+            --accent-secondary: #6366f1; /* Indigo */
+            --accent-glow: rgba(16, 185, 129, 0.2);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(16, 185, 129, 0.3);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+            filter: blur(80px);
+            animation: pulse 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: rgba(7, 9, 11, 0.7);
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .cta-btn {
+            padding: 0.6rem 1.25rem;
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.05rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px var(--accent-glow);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            padding: 1rem 2rem;
+            font-size: 1.05rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Container utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 100px;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge.blue {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+
+        h2.title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        p.subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 1. Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 8rem; /* Account for nav */
+            padding-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+            background: var(--bg-card);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-visual:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .hero-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .glow-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 2. Problem Section */
+        .problem-section {
+            background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.03), transparent);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ef4444, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .problem-card:hover::before {
+            opacity: 1;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ef4444; /* Red for problem */
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* 3. Solution / Core Benefits */
+        .solution-section {
+            position: relative;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .benefits-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(99, 102, 241, 0.2));
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .benefit-text h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .benefits-visual {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .benefits-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 4. How it Works */
+        .how-it-works {
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        /* Connecting line for desktop */
+        @media (min-width: 768px) {
+            .steps-container::before {
+                content: '';
+                position: absolute;
+                top: 40px;
+                left: 10%;
+                width: 80%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, var(--border-light) 10%, var(--border-light) 90%, transparent);
+                z-index: 0;
+            }
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+        }
+
+        /* 5. Who it's for */
+        .audience-section {
+            overflow: hidden;
+        }
+
+        .marquee-container {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 2rem 0;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 2rem;
+            padding-left: 2rem;
+            animation: scroll 40s linear infinite;
+        }
+        
+        .marquee-content.reverse {
+            animation: scroll-reverse 45s linear infinite;
+            margin-top: 2rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        @keyframes scroll-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .audience-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            padding: 1.25rem 2.5rem;
+            border-radius: 100px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .audience-tag:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* 6. Why it's different (Persuasion) */
+        .different-section {
+            background: linear-gradient(135deg, rgba(7, 9, 11, 1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .diff-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .diff-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .diff-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+        
+        .diff-list li::before {
+            content: '✓';
+            color: var(--accent-primary);
+            background: rgba(16, 185, 129, 0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* 7. Feature Highlights */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .feat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .feat-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .feat-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feat-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* 9. Purchase / CTA Bottom */
+        .cta-bottom {
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(20, 24, 32, 0.8), rgba(30, 36, 48, 0.6));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 6rem 3rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.2), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.2), transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .cta-box-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* 10. FAQ Section */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 8rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .faq-icon {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            display: none; /* simple toggle handled by JS */
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 9, 11, 0.9);
+            border-top: 1px solid var(--border-light);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-grid .col-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .footer-col h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .benefits-grid, .diff-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+            .hero-actions {
+                flex-direction: column;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            section {
+                padding: 5rem 0;
+            }
+            .cta-box {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon"></div>
+            freenote
+        </a>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="freenote-pricing.html" class="cta-btn">Get freenote</a>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">Beta Access Available</span>
+                <h1>Notes and tasks,<br><span class="text-gradient">finally in the same place.</span></h1>
+                <p class="hero-desc">
+                    freenote helps you capture ideas, turn them into action, and keep every task connected to the note where it started.
+                </p>
+                <div class="hero-actions">
+                    <a href="freenote-pricing.html" class="cta-btn-primary">Get freenote</a>
+                    <a href="#how-it-works" class="cta-btn-outline">See how it works</a>
+                </div>
+            </div>
+            
+            <div class="glow-overlay"></div>
+            
+            <div class="hero-visual">
+                <!-- Mockup from generator -->
+                <img src=".gemini/antigravity/brain/f5948f1f-7852-4a5d-8633-cab248989f5b/freenote_hero_mockup_1773389105033.png" alt="Freenote Application Interface showing notes and tasks alongside each other." onerror="this.src='https://placehold.co/1200x800/101828/ffffff?text=Freenote+App+Mockup'">
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Problem Section -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge blue">The Status Quo</span>
+                <h2 class="title">Why your workflow is broken</h2>
+                <p class="subtitle">Most productivity systems fail because they force you to separate your thinking from your doing.</p>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📝</div>
+                    <h3>Notes get buried</h3>
+                    <p>You write down a brilliant idea, but without an immediate action item attached, it disappears into an endless archive of docs.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">✅</div>
+                    <h3>Tasks lose context</h3>
+                    <p>A to-do item like "Review design spec" sits in your task manager, completely detached from the notes and thinking that led to it.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔀</div>
+                    <h3>Switching kills focus</h3>
+                    <p>Constantly Alt-Tabbing between your note-taking app and your task manager shatters your concentration and slows you down.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📂</div>
+                    <h3>Messy organization</h3>
+                    <p>Trying to maintain matching folder structures in two completely different apps creates unnecessary overhead and friction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefits-content">
+                    <span class="badge">The Freenote Way</span>
+                    <h2 class="title">Built for <span class="text-gradient-emerald">connected thinking</span></h2>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✍️</div>
+                        <div class="benefit-text">
+                            <h3>Notes-first workflow</h3>
+                            <p>Start writing immediately without friction. Capture the raw idea first, worry about structuring it later.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔗</div>
+                        <div class="benefit-text">
+                            <h3>Tasks with context</h3>
+                            <p>Tasks created inside a note act globally. They appear in your main task list, but one click brings you right back to the note where it originated.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📁</div>
+                        <div class="benefit-text">
+                            <h3>Activity organization</h3>
+                            <p>Organize work into 'Activities' without rigid clutter. Keeps the project thinking and the project doing perfectly aligned.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-text">
+                            <h3>Fast capture</h3>
+                            <p>Create notes with a global shortcut. Freenote automatically extracts titles, dates, and to-do items effortlessly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-visual">
+                    <!-- Sidebar mockup from generator -->
+                    <img src=".gemini/antigravity/brain/f5948f1f-7852-4a5d-8633-cab248989f5b/freenote_sidebar_mockup_1773389118027.png" alt="Freenote Activity Sidebar" onerror="this.src='https://placehold.co/600x800/101828/ffffff?text=Freenote+Activity+Sidebar'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. How it Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge blue">Workflow</span>
+                <h2 class="title">Three steps to clarity</h2>
+                <p class="subtitle">A system so natural, you already know how to use it.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Write a note</h3>
+                    <p>Open freenote and start brain-dumping. Don't worry about formatting, just get the context, the meeting notes, or the idea down.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Add inline tasks</h3>
+                    <p>While you're writing, just type '[]' or '- [ ]' to create a task right there in the sentence. It extracts instantly to your sidebar.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Execute globally</h3>
+                    <p>View all tasks across your entire life in one unified view. Click a task to instantly slide over the source note it came from.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Who it's for -->
+    <section class="audience-section" id="audience">
+        <div class="section-header">
+            <h2 class="title">Designed for <span class="text-gradient">deep work</span></h2>
+            <p class="subtitle">If you think in context rather than isolated lists, freenote is for you.</p>
+        </div>
+
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="audience-tag">🚀 Founders & Solo Operators</div>
+                <div class="audience-tag">📚 Students & Researchers</div>
+                <div class="audience-tag">🎨 Creatives & Writers</div>
+                <div class="audience-tag">🏗️ Product Managers</div>
+                <div class="audience-tag">💼 Agency Owners</div>
+                <!-- Duplicate for seamless scroll -->
+                <div class="audience-tag">🚀 Founders & Solo Operators</div>
+                <div class="audience-tag">📚 Students & Researchers</div>
+                <div class="audience-tag">🎨 Creatives & Writers</div>
+                <div class="audience-tag">🏗️ Product Managers</div>
+                <div class="audience-tag">💼 Agency Owners</div>
+            </div>
+        </div>
+        
+        <div class="marquee-container">
+            <div class="marquee-content reverse">
+                <div class="audience-tag">Frustrated by Roam? 😤</div>
+                <div class="audience-tag">Tired of switching apps? 🔄</div>
+                <div class="audience-tag">Want tasks with context? 🔗</div>
+                <div class="audience-tag">Need a calm interface? 🧘</div>
+                <!-- Duplicate for seamless scroll -->
+                <div class="audience-tag">Frustrated by Roam? 😤</div>
+                <div class="audience-tag">Tired of switching apps? 🔄</div>
+                <div class="audience-tag">Want tasks with context? 🔗</div>
+                <div class="audience-tag">Need a calm interface? 🧘</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Why it's different -->
+    <section class="different-section" id="why">
+        <div class="container">
+            <div class="diff-grid">
+                <div class="diff-text">
+                    <h2>Not just another notes app.<br>Not just another to-do list.</h2>
+                    <ul class="diff-list">
+                        <li><strong>Built for connected thinking.</strong> You never ask "why did I write this down?" because the surrounding paragraph is right there.</li>
+                        <li><strong>Keeps the "why" behind every task.</strong> The justification for a task lives right next to the checkbox.</li>
+                        <li><strong>Designed for calm, focused work.</strong> A distraction-free UI that gets out of your way and lets you type.</li>
+                        <li><strong>No complex tagging systems.</strong> Just write, make a checkbox, and get to work.</li>
+                    </ul>
+                </div>
+                <div class="diff-image" style="background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 20px; padding: 2rem; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                    <div style="text-align: center;">
+                        <div style="color: var(--accent-primary); font-size: 4rem; margin-bottom: 1rem;">⌘</div>
+                        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem;">Frictionless</h3>
+                        <p style="color: var(--text-secondary);">Keyboard-first navigation lets you move at the speed of thought.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Feature Highlights -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge blue">Features</span>
+                <h2 class="title">Everything you need.<br>Nothing you don't.</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feat-card">
+                    <h3 class="feat-title">Full-page note writing</h3>
+                    <p class="feat-desc">Immerse yourself in a distraction-free canvas natively optimized for long-form writing and markdown.</p>
+                </div>
+                <div class="feat-card">
+                    <h3 class="feat-title">Slide-over activity sidebar</h3>
+                    <p class="feat-desc">Command your day from the periphery. See your projects, recent activities, and pending tasks instantly.</p>
+                </div>
+                <div class="feat-card">
+                    <h3 class="feat-title">Inline task creation</h3>
+                    <p class="feat-desc">Turn any bullet point into a tracked task globally without leaving your keyboard or losing focus.</p>
+                </div>
+                <div class="feat-card">
+                    <h3 class="feat-title">Global task view</h3>
+                    <p class="feat-desc">Zoom out to see every pending action item grouped by project, date, or note context.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Purchase Section -->
+    <section class="cta-bottom">
+        <div class="container">
+            <div class="cta-box">
+                <div class="cta-box-content">
+                    <h2>Stop switching. Start doing.</h2>
+                    <p>Save time, reduce lost context, and clear your mental RAM by keeping your thinking and executing perfectly aligned.</p>
+                    <a href="freenote-pricing.html" class="cta-btn-primary">Get freenote early access</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="title">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is this for notes or tasks?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        It's primarily a notes-first application, but with a fully integrated, powerful task engine underneath. You write notes normally, but any inline action items you create are automatically syndicated to a global task manager.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I organize work by project/activity?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! Freenote introduces the concept of "Activities." You group related notes and tasks into Activities (like "Website Redesign" or "Q3 Planning"), keeping everything cleanly siloed but easily accessible.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I see all my tasks in one place?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. While tasks live inside their origin notes, Freenote aggregates them into a global "Activities" sidebar where you can view every pending task across all your notes at once.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Who is freenote best for?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        It's built for founders, product managers, researchers, writers, and anyone whose tasks usually require a paragraph of context. If you find yourself pasting links to Google Docs inside your Asana or Todoist tasks, Freenote is for you.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col col-brand">
+                    <a href="#" class="logo" style="margin-bottom: 1rem;">
+                        <div class="logo-icon"></div>
+                        freenote
+                    </a>
+                    <p style="color: var(--text-secondary); max-width: 300px; font-size: 0.95rem;">
+                        The productivity app that turns ideas into action without separating tasks from the notes that created them.
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How it works</a></li>
+                        <li><a href="freenote-pricing.html">Pricing</a></li>
+                        <li><a href="#">Download</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Twitter/X</a></li>
+                        <li><a href="freenote-support.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="freenote-privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Liewright. All rights reserved.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="display: flex; align-items: center; gap: 0.5rem;"><span style="display: inline-block; width: 8px; height: 8px; background: var(--accent-primary); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow);"></span> Systems Operational</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Logic
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

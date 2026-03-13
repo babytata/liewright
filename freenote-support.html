@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freenote Support & Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07090b; --bg-card: rgba(20, 24, 32, 0.6); --accent-primary: #10b981;
+            --accent-secondary: #6366f1; --accent-glow: rgba(16, 185, 129, 0.2);
+            --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --border-light: rgba(255, 255, 255, 0.08); --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        
+        /* Standard Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(24px); background: rgba(7, 9, 11, 0.7); border-bottom: 1px solid var(--border-light); }
+        .logo { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 6px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-primary); }
+        .cta-btn { padding: 0.6rem 1.25rem; background: var(--text-primary); color: var(--bg-dark); border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+        
+        .ambient-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.05) 0%, transparent 60%); filter: blur(80px); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+        /* Support Specific Code */
+        .support-hero { padding: 12rem 0 4rem; text-align: center; }
+        .support-hero h1 { font-size: clamp(3rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .text-gradient { background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .support-hero p { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto 8rem; }
+
+        /* Contact Options (Left) */
+        .contact-options { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px; padding: 2rem; display: flex; align-items: flex-start; gap: 1.5rem; transition: var(--transition); }
+        .contact-card:hover { border-color: rgba(255, 255, 255, 0.15); transform: translateY(-3px); }
+        .card-icon { font-size: 2rem; color: var(--accent-secondary); }
+        .card-content h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .card-content p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+        .contact-link { color: var(--accent-primary); font-weight: 500; text-decoration: none; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem; }
+        .contact-link:hover { color: #34d399; }
+
+        /* Support Form (Right) */
+        .support-form-container { background: linear-gradient(145deg, rgba(20, 24, 32, 0.9), rgba(16, 185, 129, 0.02)); border: 1px solid var(--border-light); border-radius: 24px; padding: 2.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        .form-input, .form-textarea { width: 100%; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-light); border-radius: 8px; padding: 1rem; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 1rem; transition: var(--transition); }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-secondary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+        .form-textarea { min-height: 150px; resize: vertical; }
+        .btn-submit { width: 100%; padding: 1rem; border-radius: 8px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: var(--transition); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3); }
+
+        .form-message.success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .form-message.error { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        /* Footer */
+        footer { margin-top: auto; background: rgba(7, 9, 11, 0.9); border-top: 1px solid var(--border-light); padding: 4rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid .col-brand { grid-column: 1 / -1; } }
+        .footer-col h3 { font-family: 'Outfit', sans-serif; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 600; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; }
+        .footer-bottom { border-top: 1px solid var(--border-light); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .support-grid { grid-template-columns: 1fr; } .support-hero { padding: 8rem 0 4rem; } }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+
+    <nav>
+        <a href="freenote-landing.html" class="logo"><div class="logo-icon"></div>freenote</a>
+        <ul class="nav-links">
+            <li><a href="freenote-landing.html#how-it-works">How it Works</a></li>
+            <li><a href="freenote-landing.html#features">Features</a></li>
+            <li><a href="freenote-pricing.html">Pricing</a></li>
+        </ul>
+        <a href="freenote-pricing.html" class="cta-btn">Get freenote</a>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section class="support-hero">
+                <h1>We're here to <span class="text-gradient">help</span></h1>
+                <p>Having trouble with Freenote, want to report a bug during the Beta, or just want to tell us a feature idea? Let us know.</p>
+            </section>
+
+            <div class="support-grid">
+                <!-- Left Column: Contact Methods -->
+                <div class="contact-options">
+                    <div class="contact-card">
+                        <div class="card-icon">✉️</div>
+                        <div class="card-content">
+                            <h3>Email Support</h3>
+                            <p>For technical issues, bug reports, and account questions. We aim to reply within 24 hours.</p>
+                            <a href="mailto:support@liewright.com" class="contact-link">support@liewright.com &rarr;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="card-icon">💡</div>
+                        <div class="card-content">
+                            <h3>Feature Requests</h3>
+                            <p>Have an idea that would make Freenote significantly better for your workflow?</p>
+                            <a href="#" class="contact-link">Submit Feedback &rarr;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="card-icon">🐦</div>
+                        <div class="card-content">
+                            <h3>Twitter / X</h3>
+                            <p>For quick questions and staying up to date with the latest features and development drops.</p>
+                            <a href="#" class="contact-link">@Liewright &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contact form configured for Netlify Forms -->
+                <div class="support-form-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 2rem;">Send a message directly</h2>
+                    <form name="freenote-support" id="freenote-support-form" method="POST" data-netlify="true">
+                        <div style="display: flex; gap: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" id="first_name" name="first_name" class="form-input" required>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" class="form-input" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="hello@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="device_version" class="form-label">Device Tracker / Beta Version (Optional)</label>
+                            <input type="text" id="device_version" name="device_version" class="form-input" placeholder="e.g., Mac M2, Beta v0.9">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Describe your issue or feedback in detail..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                        <div id="form-status" class="form-message" style="display: none; margin-top: 15px; padding: 15px; border-radius: 8px; text-align: center; font-size: 0.95rem;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col col-brand">
+                    <a href="freenote-landing.html" class="logo" style="margin-bottom: 1rem;"><div class="logo-icon"></div>freenote</a>
+                    <p style="color: var(--text-secondary); max-width: 300px; font-size: 0.95rem;">The productivity app that turns ideas into action without separating tasks from the notes.</p>
+                </div>
+                <!-- Standard Footer links -->
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <ul class="footer-links"><li><a href="freenote-landing.html#features">Features</a></li><li><a href="freenote-landing.html#how-it-works">How it works</a></li><li><a href="freenote-pricing.html">Pricing</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links"><li><a href="#">About</a></li><li><a href="freenote-support.html">Contact</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links"><li><a href="freenote-privacy-policy.html">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Liewright. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const supportForm = document.getElementById('freenote-support-form');
+            const submitBtn = document.querySelector('.btn-submit');
+            const formStatus = document.getElementById('form-status');
+
+            if (supportForm) {
+                supportForm.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    submitBtn.textContent = "Sending...";
+                    submitBtn.disabled = true;
+                    formStatus.style.display = 'none';
+                    formStatus.className = 'form-message'; // Reset
+
+                    const formData = {
+                        first_name: document.getElementById('first_name').value,
+                        last_name: document.getElementById('last_name').value,
+                        email: document.getElementById('email').value,
+                        device_version: document.getElementById('device_version').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    try {
+                        const response = await fetch('/.netlify/functions/submitTicket', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            formStatus.textContent = "Thank you! Your message has been sent successfully.";
+                            formStatus.classList.add('success');
+                            supportForm.reset();
+                        } else {
+                            throw new Error(result.error || "Failed to submit form");
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        formStatus.textContent = "Oops! There was a problem submitting your form. Please try again later.";
+                        formStatus.classList.add('error');
+                    } finally {
+                        formStatus.style.display = 'block';
+                        submitBtn.textContent = "Send Message";
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

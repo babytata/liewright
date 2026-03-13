@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freenote Pricing - Simple, transparent plans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Inherited from main freenote css */
+            --bg-dark: #07090b;
+            --bg-card: rgba(20, 24, 32, 0.6);
+            --bg-elevated: rgba(30, 36, 48, 0.8);
+            
+            --accent-primary: #10b981; /* Emerald */
+            --accent-secondary: #6366f1; /* Indigo */
+            --accent-glow: rgba(16, 185, 129, 0.2);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(16, 185, 129, 0.3);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+            filter: blur(80px);
+        }
+
+        /* Nav & Footer (Copied exactly to ensure consistency) */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.25rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            background: rgba(7, 9, 11, 0.7); border-bottom: 1px solid var(--border-light);
+        }
+        .logo { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 6px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-primary); }
+        .cta-btn { padding: 0.6rem 1.25rem; background: var(--text-primary); color: var(--bg-dark); border: none; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; transition: var(--transition); }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+        /* Pricing Specific Code */
+        .pricing-hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+        }
+
+        .pricing-hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 8rem;
+            padding: 0 1rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(145deg, rgba(20, 24, 32, 0.9), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 40px rgba(16, 185, 129, 0.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .plan-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .plan-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            flex-grow: 1;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+        
+        .feature-list li.missing {
+            color: var(--text-muted);
+        }
+        
+        .feature-list li.missing::before {
+            content: '—';
+            color: var(--text-muted);
+        }
+
+        .btn-full {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 8rem; }
+        .faq-item { border-bottom: 1px solid var(--border-light); padding: 1.5rem 0; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 500; cursor: pointer; color: var(--text-primary); }
+        .faq-icon { color: var(--accent-primary); font-size: 1.5rem; transition: transform 0.3s ease; }
+        .faq-answer { color: var(--text-secondary); margin-top: 1rem; font-size: 1rem; line-height: 1.7; display: none; }
+        .faq-item.active .faq-answer { display: block; animation: fadeIn 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Footer */
+        footer { margin-top: auto; background: rgba(7, 9, 11, 0.9); border-top: 1px solid var(--border-light); padding: 4rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid .col-brand { grid-column: 1 / -1; } }
+        .footer-col h3 { font-family: 'Outfit', sans-serif; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 600; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; transition: var(--transition); font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--accent-primary); }
+        .footer-bottom { border-top: 1px solid var(--border-light); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .pricing-hero { padding: 8rem 0 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+
+    <nav>
+        <a href="freenote-landing.html" class="logo">
+            <div class="logo-icon"></div>
+            freenote
+        </a>
+        <ul class="nav-links">
+            <li><a href="freenote-landing.html#how-it-works">How it Works</a></li>
+            <li><a href="freenote-landing.html#features">Features</a></li>
+            <li><a href="freenote-landing.html#faq">FAQ</a></li>
+        </ul>
+        <a href="freenote-pricing.html" class="cta-btn">Get freenote</a>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section class="pricing-hero">
+                <h1>Simple, <span class="text-gradient">transparent pricing</span></h1>
+                <p>Choose the plan that fits how you work. Deep work doesn't need to come with a complex subscription model.</p>
+            </section>
+
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <h2 class="plan-name">Beta User</h2>
+                    <div class="plan-price">$0<span>/forever</span></div>
+                    <p class="plan-desc">For early adopters willing to provide feedback during our beta phase.</p>
+                    
+                    <ul class="feature-list">
+                        <li>Unlimited Notes & Tasks</li>
+                        <li>Global Task View</li>
+                        <li>Activity Sidebar</li>
+                        <li>Basic Local Sync</li>
+                        <li class="missing">Cross-device iCloud Sync</li>
+                        <li class="missing">Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn-full btn-outline">Join Beta Waitlist</a>
+                </div>
+
+                <!-- Pro Tier (Featured) -->
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Coming Soon</div>
+                    <h2 class="plan-name">Pro License</h2>
+                    <div class="plan-price">$49<span>/one-time</span></div>
+                    <p class="plan-desc">A single, one-time payment. Own the software forever. No subscriptions.</p>
+                    
+                    <ul class="feature-list">
+                        <li>Unlimited Notes & Tasks</li>
+                        <li>Global Task View</li>
+                        <li>Activity Sidebar</li>
+                        <li>Cross-device iCloud Sync</li>
+                        <li>Advanced Search & Filtering</li>
+                        <li>1 Year of Priority Support & Updates</li>
+                    </ul>
+                    <a href="#" class="btn-full btn-primary">Get Notified on Launch</a>
+                </div>
+            </div>
+
+            <!-- FAQ Specific to Pricing -->
+            <section class="faq-section" id="faq">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Pricing FAQ</h2>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Is it really a one-time purchase?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes. Freenote Pro is a one-time purchase. You buy the app, and it's yours. We believe productivity software shouldn't tax you monthly just to write notes. The license includes all point-updates and a full year of dedicated support.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Are there team plans available?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Freenote is currently designed for solo operators and individual contributors to manage their personal context. We are exploring team collaboration features for the future, but right now, the focus is on the single-player experience.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What happens during the Beta?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            The beta is free to use while we gather feedback and squash bugs. Beta users will receive a significant discount if they choose to upgrade to the Pro License when version 1.0 officially launches.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col col-brand">
+                    <a href="freenote-landing.html" class="logo" style="margin-bottom: 1rem;">
+                        <div class="logo-icon"></div>
+                        freenote
+                    </a>
+                    <p style="color: var(--text-secondary); max-width: 300px; font-size: 0.95rem;">
+                        The productivity app that turns ideas into action without separating tasks from the notes that created them.
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="freenote-landing.html#features">Features</a></li>
+                        <li><a href="freenote-landing.html#how-it-works">How it works</a></li>
+                        <li><a href="freenote-pricing.html">Pricing</a></li>
+                        <li><a href="#">Download</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Twitter/X</a></li>
+                        <li><a href="freenote-support.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="freenote-privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Liewright. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(faq => faq.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
