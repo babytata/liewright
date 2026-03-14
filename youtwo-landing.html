@@ -158,12 +158,9 @@
             animation: fadeInUp 0.8s ease 0.2s backwards;
         }
 
-        .hero h1 .gradient-text {
+        .hero h1 .white-italic-text {
             font-style: italic;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
         }
 
         .hero-subtitle {
@@ -503,7 +500,13 @@
             }
 
             .hero {
-                padding: 6rem 1.5rem 3rem;
+                padding: 8rem 1.5rem 3rem;
+                display: block;
+                min-height: auto;
+            }
+
+            .app-preview {
+                margin-top: 3rem;
             }
 
             .hero-buttons {
@@ -518,7 +521,7 @@
 
             .preview-content {
                 grid-template-columns: 1fr;
-                grid-template-rows: 1fr 2px 1fr;
+                grid-template-rows: auto 2px auto;
             }
 
             .divider {
@@ -555,7 +558,7 @@
         <div class="hero-badge">🚀 Now Rebuilt Native for iOS</div>
         <h1>
             Think in<br>
-            <span class="gradient-text">Two Dimensions</span>
+            <span class="white-italic-text">Two Dimensions</span>
         </h1>
         <p class="hero-subtitle">
             The dual-pane note-taking app that lets you write, compare, and create side-by-side. Perfect for
@@ -614,7 +617,6 @@
 
     <section class="features" id="features">
         <div class="section-header">
-            <div class="section-badge">✨ Powerful Features</div>
             <h2 class="section-title">Built for Your Workflow</h2>
             <p class="section-subtitle">
                 Every feature designed to make dual-pane note-taking seamless, powerful, and delightful.
