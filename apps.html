@@ -228,12 +228,12 @@
             nav.active .mobile-menu-btn .hamburger-line:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
             /* Mobile Header layout and hidden logos */
-            .mobile-logo-link { display: block; margin-left: 15px; }
+            .mobile-logo-link { display: block; margin-right: 15px; margin-left: auto; }
             .mobile-logo { height: 20px; vertical-align: middle; }
             .nav-clone { display: none !important; }
             .nav-items a.logo { display: none !important; }
             .nav-items li:has(a.logo) { display: none !important; }
-            .mobile-menu-btn { margin-left: auto !important; margin-right: 15px !important; }
+            .mobile-menu-btn { margin-left: 15px !important; margin-right: auto !important; }
         }
     </style>
 
@@ -241,13 +241,13 @@
 <body>
  <header>
         <nav>
-        <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
         <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" aria-label="Toggle Menu">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
         </button>
+        <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
             <div class="nav-carousel">
                 
                 <div class="nav-items-container">
