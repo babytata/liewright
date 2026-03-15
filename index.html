@@ -305,6 +305,7 @@
     
         
         /* Mobile Menu */
+        .mobile-logo-link { display: none; }
         .mobile-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; margin-left: auto; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; }
         .hamburger-line { width: 100%; height: 2px; background-color: #bdccd4; transition: all 0.3s ease; }
         
@@ -323,6 +324,14 @@
             nav.active .mobile-menu-btn .hamburger-line:nth-child(2) { opacity: 0; }
             nav.active .mobile-menu-btn .hamburger-line:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
+            /* Mobile Header layout and hidden logos */
+            .mobile-logo-link { display: block; margin-left: 15px; }
+            .mobile-logo { height: 20px; vertical-align: middle; }
+            .nav-clone { display: none !important; }
+            .nav-items a.logo { display: none !important; }
+            .nav-items li:has(a.logo) { display: none !important; }
+            .mobile-menu-btn { margin-left: auto !important; margin-right: 15px !important; }
+
             /* Scale thumbnails to 50% on mobile */
             .gallery-item {
                 width: 140px; /* 50% of 280px */
@@ -337,6 +346,7 @@
 <body>
     <header>
         <nav>
+        <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
         <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" aria-label="Toggle Menu">
             <span class="hamburger-line"></span>
@@ -429,8 +439,16 @@
                 const navItems = carousel.querySelector('.nav-items');
                 if (navItems) {
                     const items = navItems.querySelectorAll('li');
-                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
-                    items.forEach(item => navItems.appendChild(item.cloneNode(true)));
+                    items.forEach(item => {
+                        let c = item.cloneNode(true);
+                        c.classList.add('nav-clone');
+                        navItems.appendChild(c);
+                    });
+                    items.forEach(item => {
+                        let c = item.cloneNode(true);
+                        c.classList.add('nav-clone');
+                        navItems.appendChild(c);
+                    });
 
                     let trackPos = 0;
                     let currentScrollSpeed = 0;
