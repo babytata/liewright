@@ -26,8 +26,8 @@ exports.handler = async (event, context) => {
         const url = `https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableName)}`;
 
         const fields = {
-            "first_name": first_name,
-            "last_name": last_name,
+            "First Name": first_name,
+            "Last Name": last_name,
             "Email": email,
             "Message": message,
         };
