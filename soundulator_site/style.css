@@ -1,0 +1,145 @@
+/* Overall page + calculator layout */
+body {
+  background: linear-gradient(to bottom right, #f0f4f8, #dbeafe);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Calculator box */
+.calculator {
+  background: #1f2937;          /* dark */
+  padding: 30px 20px;
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.25);
+  width: 320px;
+}
+
+/* Display */
+.display {
+  background: #d1fae5;          /* light green screen */
+  color: #111;
+  font-size: 2.2rem;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: right;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.15);
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Buttons */
+.btn {
+  background: #4b5563;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 16px 0;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s;
+  box-shadow: 0 4px 10px rgba(0,0,0,.18);
+}
+.btn:hover { background: #6b7280; }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+
+/* Special keys */
+.btn.op      { background: #3b82f6; }
+.btn#equals  { background: #10b981; }
+.btn#clear   { background: #ef4444; }
+
+/* Play/Repeat/Stop row */
+.sequence-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn.square.empty { background: transparent; border: 1px dashed #94a3b8; color: transparent; }
+
+/* Divider + light instruction box (so it's readable on dark bg) */
+.divider {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 16px 0 12px;
+}
+.instructions {
+  font-size: .95rem;
+  text-align: left;
+  padding: 10px 12px;
+  background: #f9fafb;     /* light background inside dark calculator */
+  color: #111;             /* readable text */
+  border-radius: 10px;
+}
+.instructions h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.instructions p { margin: 4px 0; }
+
+/* Store link inside dark box */
+.store-link { margin-top: 10px; text-align: center; }
+.store-link a {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #e5e7eb;     /* pill button on dark */
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+}
+.store-link a:hover { background: #d1d5db; }
+
+/* Intro + About sections (outside the calculator) */
+.intro-container { text-align: center; margin: 16px 0 10px; }
+.intro-container h1 { margin: 0; font-size: 1.4rem; color: #111; }
+.intro-container p  { margin: 6px 0 0; font-size: 1rem; color: #444; }
+
+.about-container {
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 0 15px;
+  text-align: center;
+}
+.about-container h2 { font-size: 1.2rem; margin-bottom: 8px; }
+.about-container p  { color: #222; line-height: 1.6; }
+.about-container .copyright { margin-top: 12px; font-size: .9rem; color: #555; }
+
+/* Ad wrapper for nice spacing when ads show */
+.ad-wrap { margin: 12px auto 0; max-width: 728px; }
+
+/* Make the link button match the other square buttons */
+/* Make ALL 4 controls perfect squares */
+.sequence-controls .btn.square,
+.sequence-controls .link-btn {
+  aspect-ratio: 1 / 1;   /* the magic */
+  width: 100%;
+  height: auto;          /* let aspect-ratio control height */
+  padding: 0;            /* override .btn's padding so it doesn't distort */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Link button inherits the same look as other buttons */
+.btn.square.link-btn {
+  background: #4b5563;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  color: #fff;
+  text-decoration: none;
+}
+.btn.square.link-btn:hover { background: #6b7280; }
+.btn.square.link-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}

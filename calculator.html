@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Soundulator – Musical Calculator that Plays Notes for Numbers</title>
+    <meta name="description"
+        content="Soundulator is a free online musical calculator. Press numbers to hear notes, do math that makes melodies, and loop your results for fun rhythms." />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        /* TEMP: force calculator layout even if external CSS fails */
+        .calculator {
+            width: 320px;
+            margin: 0 auto;
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .display {
+            height: 60px;
+            background: #d1fae5;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 18px 0;
+            font-size: 1.4rem;
+            border: 0;
+            border-radius: 12px;
+            background: #4b5563;
+            color: #fff;
+        }
+
+        .sequence-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn.square {
+            height: 60px;
+        }
+    </style>
+
+    <!-- AdSense loader -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2020734510583972"
+        crossorigin="anonymous"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H541N5F6SJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-H541N5F6SJ');
+    </script>
+</head>
+
+<body>
+
+    <!-- Header container above calculator -->
+    <div class="intro-container">
+        <h1>Soundulator – Musical Calculator</h1>
+        <p>Do math that makes music. Press numbers to hear notes, then loop your results.</p>
+    </div>
+
+    <!-- Top Banner Ad -->
+    <ins class="adsbygoogle" style="display:block; margin:0 auto 12px;" data-ad-client="ca-pub-2020734510583972"
+        data-ad-slot="5767949882" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <!-- Calculator -->
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+
+        <div class="buttons">
+            <button class="btn" data-num="7">7</button>
+            <button class="btn" data-num="8">8</button>
+            <button class="btn" data-num="9">9</button>
+            <button class="btn op" data-op="/">÷</button>
+
+            <button class="btn" data-num="4">4</button>
+            <button class="btn" data-num="5">5</button>
+            <button class="btn" data-num="6">6</button>
+            <button class="btn op" data-op="*">×</button>
+
+            <button class="btn" data-num="1">1</button>
+            <button class="btn" data-num="2">2</button>
+            <button class="btn" data-num="3">3</button>
+            <button class="btn op" data-op="-">−</button>
+
+            <button class="btn" data-num="0">0</button>
+            <button class="btn" id="clear">C</button>
+            <button class="btn" id="equals">=</button>
+            <button class="btn op" data-op="+">+</button>
+        </div>
+
+        <div class="sequence-controls">
+            <button class="btn square" id="play-seq" title="Play">▶</button>
+            <button class="btn square" id="loop-seq" title="Repeat">⟳</button>
+            <button class="btn square" id="stop-seq" title="Stop">□</button>
+            <!-- last square is the link -->
+            <a href="https://shop.liewright.com" target="_blank" rel="noopener" class="btn square link-btn">↗</a>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3>How to Use the Sound Controls</h3>
+            <p>▶ <strong>Play</strong> – Plays the sound sequence of the most recent calculation result.</p>
+            <p>⟳ <strong>Repeat</strong> – Continuously loops the sound sequence until you press Stop.</p>
+            <p>□ <strong>Stop</strong> – Immediately stops any sound or loop that’s playing.</p>
+        </div>
+
+        <!-- Store Link -->
+        <div class="store-link">
+            <a href="https://shop.liewright.com/GO-HARD-p793918041" target="_blank" rel="noopener">
+                🛒 Get the <strong>GO HARD</strong> T-shirt
+            </a>
+        </div>
+    </div>
+
+    <!-- About + Footer BELOW the ad and calculator -->
+    <div class="about-container">
+        <h2>About Soundulator</h2>
+        <p>
+            Soundulator is a free musical calculator that turns numbers into notes so you can
+            <strong>do math that makes music</strong>. Each button press plays a tone, and your final
+            result becomes a note sequence. Hit ▶ Play to hear it again or ⟳ Repeat to loop it
+            into a simple melody. It’s a fun way to explore math, sound, and rhythm—great for
+            students, music lovers, and anyone curious about turning calculations into catchy patterns.
+        </p>
+        <p class="copyright">© 2025 Soundulator. Math you can hear.</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
