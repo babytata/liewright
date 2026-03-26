@@ -390,7 +390,7 @@
         }
 
         .form-container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background: #111;
             padding: 3rem;
@@ -399,18 +399,32 @@
         }
 
         .form-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
+        }
+        
+        .form-group.textarea-group {
+            align-items: flex-start;
         }
 
         .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
+            width: 160px;
+            flex-shrink: 0;
+            margin-bottom: 0;
             color: #bdccd4;
             font-weight: 500;
+            text-align: right;
+        }
+
+        .form-group.textarea-group .form-label {
+            padding-top: 1rem;
         }
 
         .form-input {
             width: 100%;
+            flex-grow: 1;
             padding: 1rem;
             background: rgba(255,255,255,0.05);
             border: 1px solid #333;
@@ -441,9 +455,14 @@
             padding-right: 2.5rem;
         }
 
+        .form-submit-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
         .form-submit {
-            width: 100%;
-            padding: 1.2rem;
+            padding: 1.2rem 3rem;
             background: #f0f0f0;
             color: #111;
             border: none;
@@ -452,7 +471,6 @@
             font-weight: 700;
             cursor: pointer;
             transition: background 0.3s;
-            margin-top: 1rem;
         }
 
         .form-submit:hover {
@@ -580,7 +598,16 @@
                 padding: 1.5rem; 
             }
             
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
             .form-label {
+                width: auto;
+                text-align: left;
+                padding-top: 0 !important;
                 font-size: 0.9rem;
             }
             
@@ -589,7 +616,12 @@
                 font-size: 0.9rem;
             }
             
+            .form-submit-container {
+                justify-content: stretch;
+            }
+            
             .form-submit {
+                width: 100%;
                 padding: 1rem;
                 font-size: 1rem;
             }
@@ -793,12 +825,14 @@
                     </select>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group textarea-group">
                     <label class="form-label" for="needs">What do you need?</label>
                     <textarea id="needs" name="needs" class="form-input" placeholder="Give me a brief overview of your project..." required></textarea>
                 </div>
                 
-                <button type="submit" class="form-submit" id="submit-btn">👉 Start My Project</button>
+                <div class="form-submit-container">
+                    <button type="submit" class="form-submit" id="submit-btn">👉 Start My Project</button>
+                </div>
                 <div id="form-status" class="form-message"></div>
             </form>
         </div>
