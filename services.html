@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="p:domain_verify" content="2c9bedca3a1bab87a88ff1c840f47fbb"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Work With Liewright</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #bdccd4;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #1c1c1c;
+            padding: 1rem 20px;
+            border-bottom: 2px solid #bbbdbf;
+        }
+
+        nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a.logo img {
+            height: 20px !important;
+            vertical-align: middle;
+        }
+
+        nav ul li a.logo {
+            padding: 0;
+        }
+
+        nav ul li a.logo:hover {
+            background-color: transparent;
+        }
+
+        .nav-carousel {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-items-container {
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
+        }
+
+        nav ul.nav-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        nav ul.nav-items li {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+
+        nav ul li a {
+            color: #bdccd4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #bbbdbf;
+            color: #111;
+        }
+        
+        /* Mobile Menu */
+        .mobile-logo-link { display: none; }
+        .mobile-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; margin-left: auto; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; }
+        .hamburger-line { width: 100%; height: 2px; background-color: #bdccd4; transition: all 0.3s ease; }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: flex; }
+            nav { flex-wrap: wrap; position: relative; }
+            .nav-carousel, .nav-carousel-container { display: none; width: 100%; }
+            nav.active .nav-carousel, nav.active .nav-carousel-container { display: flex; position: absolute; top: 100%; left: 0; right: 0; width: 100vw; background-color: #1c1c1c; flex-direction: column; align-items: center; padding: 20px 0; border-bottom: 2px solid #bbbdbf; z-index: 1000; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); overflow: visible; }
+            nav.active .nav-items-container { overflow: visible; display: flex; justify-content: center; width: 100%; }
+            nav.active .nav-items { display: flex; flex-direction: column; width: 100%; transform: none !important; animation: none; gap: 20px; text-align: center; justify-content: center; overflow: visible; }
+            nav.active .nav-items > li, nav.active .nav-items > a { display: block; width: 100%; }
+            
+            nav.active .mobile-menu-btn .hamburger-line:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+            nav.active .mobile-menu-btn .hamburger-line:nth-child(2) { opacity: 0; }
+            nav.active .mobile-menu-btn .hamburger-line:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+
+            .mobile-logo-link { display: block; margin-right: 15px; margin-left: auto; }
+            .mobile-logo { height: 20px; vertical-align: middle; }
+            .nav-clone { display: none !important; }
+            .nav-items a.logo { display: none !important; }
+            .nav-items li:has(a.logo) { display: none !important; }
+            .mobile-menu-btn { margin-left: 15px !important; margin-right: auto !important; }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 20px 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            color: #f0f0f0;
+            letter-spacing: -1px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #bdccd4;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Formatting */
+        section {
+            padding: 4rem 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: #f0f0f0;
+            margin: 0 0 1rem;
+            font-weight: 600;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .service-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-card ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #bdccd4;
+        }
+
+        .service-card ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        /* Pricing Grid */
+        .pricing-section {
+            background: #161616;
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: #bbbdbf;
+        }
+
+        .tier-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .starter-color { color: #34d399; }
+        .standard-color { color: #60a5fa; }
+        .premium-color { color: #f87171; }
+
+        .price-amount {
+            font-size: 2.5rem;
+            color: #f0f0f0;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #777;
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .price-card ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #bdccd4;
+            font-size: 0.95rem;
+        }
+        
+        .price-card ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #bbbdbf;
+        }
+        
+        /* Your Edge */
+        .edge-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 6rem 20px;
+        }
+        
+        .edge-section p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #bdccd4;
+            margin-bottom: 1rem;
+        }
+        
+        .edge-highlight {
+            color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .process-list {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .process-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: #111;
+            border: 1px solid #555;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 1.2rem;
+            color: #bdccd4;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: #161616;
+            border-top: 1px solid #333;
+            padding: 6rem 20px 8rem;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #111;
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #bdccd4;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #f0f0f0;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #bbbdbf;
+        }
+        
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23bbbdbf%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.65rem auto;
+            padding-right: 2.5rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: #f0f0f0;
+            color: #111;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: #fff;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(248, 113, 113, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+            background: #111;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .footer-col {
+            margin: 0 20px;
+            min-width: 120px;
+        }
+
+        .footer-col h4 {
+            color: #bbbdbf;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #bbbdbf;
+        }
+
+        .footer-logo-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px;
+        }
+
+        .footer-logo-col img {
+            height: 25px !important;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-logo-col img:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 4rem 20px 2rem; }
+            .form-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
+            <div class="nav-carousel">
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="graphic-design.html">Graphic Design</a></li>
+                        <li><a href="logo.html">Logo</a></li>
+                        <li><a href="services.html" class="active">Hire Me</a></li>
+                        <li><a href="illustration.html">Illustration</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="https://shop.liewright.com" target="_blank">Shop</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section 1: Hero -->
+    <section class="hero">
+        <h1>Work With Liewright</h1>
+        <p>I design brands, websites, and digital products that actually stand out.</p>
+    </section>
+
+    <!-- Section 2: Services -->
+    <section>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-emoji">🎨</div>
+                <h3>Brand Design</h3>
+                <ul>
+                    <li>Logos</li>
+                    <li>Visual identity</li>
+                    <li>Brand direction</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-emoji">💻</div>
+                <h3>Website Design</h3>
+                <ul>
+                    <li>Landing pages</li>
+                    <li>Business websites</li>
+                    <li>E-commerce design</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-emoji">⚙️</div>
+                <h3>Creative Development</h3>
+                <ul>
+                    <li>Apps (like your Soundulator)</li>
+                    <li>Interactive tools</li>
+                    <li>Custom builds</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Pricing -->
+    <section class="pricing-section">
+        <div class="section-header">
+            <h2>Pricing Structure</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="tier-name"><span class="starter-color">🟢</span> STARTER</div>
+                <div class="price-amount">$150–$300</div>
+                
+                <div class="price-section-title">Good for:</div>
+                <ul>
+                    <li>Simple logo</li>
+                    <li>Quick landing page</li>
+                </ul>
+                
+                <div class="price-section-title">Includes:</div>
+                <ul>
+                    <li>1 concept</li>
+                    <li>2 revisions</li>
+                    <li>Fast turnaround</li>
+                </ul>
+            </div>
+            
+            <div class="price-card">
+                <div class="tier-name"><span class="standard-color">🔵</span> STANDARD</div>
+                <div class="price-amount">$400–$800</div>
+                
+                <div class="price-section-title">Good for:</div>
+                <ul>
+                    <li>Full website (1–5 pages)</li>
+                    <li>Stronger branding</li>
+                </ul>
+                
+                <div class="price-section-title">Includes:</div>
+                <ul>
+                    <li>Custom design</li>
+                    <li>Mobile layout</li>
+                    <li>3–5 revisions</li>
+                </ul>
+            </div>
+            
+            <div class="price-card">
+                <div class="tier-name"><span class="premium-color">🔴</span> PREMIUM</div>
+                <div class="price-amount">$1,000+</div>
+                
+                <div class="price-section-title">Good for:</div>
+                <ul>
+                    <li>Full systems</li>
+                    <li>Apps</li>
+                    <li>Advanced builds</li>
+                </ul>
+                
+                <div class="price-section-title">Includes:</div>
+                <ul>
+                    <li>Strategy</li>
+                    <li>Design + development</li>
+                    <li>Ongoing support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Edge -->
+    <section class="edge-section">
+        <p>Liewright isn’t just design.</p>
+        <p>It’s culture, systems, and experimentation.</p>
+        <p class="edge-highlight">I build things that don’t look like everybody else.</p>
+    </section>
+
+    <!-- Section 5: Process -->
+    <section style="padding-top: 0;">
+        <div class="section-header">
+            <h2>How It Works</h2>
+        </div>
+        <div class="process-list">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <div class="step-text">Tell me what you need</div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <div class="step-text">I design the concept</div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <div class="step-text">We refine it</div>
+            </div>
+            <div class="process-step" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+                <div class="step-num">4</div>
+                <div class="step-text">I deliver or launch</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Contact -->
+    <section class="contact-section">
+        <div class="section-header">
+            <h2>Start a Project</h2>
+        </div>
+        <div class="form-container">
+            <form id="project-form">
+                <div class="form-group">
+                    <label class="form-label" for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="budget">Budget</label>
+                    <select id="budget" name="budget" class="form-input" required>
+                        <option value="" disabled selected>Select a range</option>
+                        <option value="Starter ($150–$300)">Starter ($150–$300)</option>
+                        <option value="Standard ($400–$800)">Standard ($400–$800)</option>
+                        <option value="Premium ($1,000+)">Premium ($1,000+)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="needs">What do you need?</label>
+                    <textarea id="needs" name="needs" class="form-input" placeholder="Give me a brief overview of your project..." required></textarea>
+                </div>
+                
+                <button type="submit" class="form-submit" id="submit-btn">👉 Start My Project</button>
+                <div id="form-status" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Hire Me</a>
+                <a href="https://shop.liewright.com" target="_blank">Shop</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Collections</h4>
+                <a href="graphic-design.html">Graphic Design</a>
+                <a href="logo.html">Logo</a>
+                <a href="illustration.html">Illustration</a>
+                <a href="photography.html">Photography</a>
+            </div>
+            <div class="footer-col">
+                <h4>Network</h4>
+                <a href="projects.html">Archives</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="liewright-privacy-policy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-col footer-logo-col">
+                <a href="/"><img src="images/liewright_logo.png" alt="Liewright Logo"></a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Liewright — All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            if (mobileMenuBtn && nav) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    const itemsContainers = document.querySelectorAll('.nav-items-container, .nav-carousel, .nav-carousel-container');
+                    itemsContainers.forEach(el => {
+                        if (nav.classList.contains('active')) {
+                            el.style.display = 'flex';
+                        } else {
+                            el.style.display = '';
+                        }
+                    });
+                });
+            }
+
+            // Nav carousel
+            const carousel = document.querySelector(".nav-carousel");
+            if (carousel) {
+                const navItems = carousel.querySelector(".nav-items");
+                if (navItems) {
+                    const items = navItems.querySelectorAll("li");
+
+                    if (items.length > 0) {
+                        items.forEach(item => {
+                            let c = item.cloneNode(true);
+                            c.classList.add('nav-clone');
+                            navItems.appendChild(c);
+                        });
+                        items.forEach(item => {
+                            let c = item.cloneNode(true);
+                            c.classList.add('nav-clone');
+                            navItems.appendChild(c);
+                        });
+                    }
+
+                    let trackPos = 0;
+                    let currentScrollSpeed = 0;
+                    let targetScrollSpeed = 0;
+                    let isNavMouseOver = false;
+                    let mouseX = 0;
+
+                    carousel.addEventListener("mouseenter", () => isNavMouseOver = true);
+                    carousel.addEventListener("mouseleave", () => { isNavMouseOver = false; });
+                    carousel.addEventListener("mousemove", (e) => { mouseX = e.clientX; });
+
+                    function navLoop() {
+                        if (isNavMouseOver) {
+                            const rect = carousel.getBoundingClientRect();
+                            const width = rect.width;
+                            const relativeX = mouseX - rect.left;
+
+                            const leftThreshold = width * 0.25;
+                            const rightThreshold = width * 0.75;
+                            const maxSpeed = 3;
+
+                            if (relativeX < leftThreshold) {
+                                const ratio = 1 - (relativeX / leftThreshold);
+                                targetScrollSpeed = -1 * maxSpeed * ratio;
+                            } else if (relativeX > rightThreshold) {
+                                const ratio = (relativeX - rightThreshold) / (width - rightThreshold);
+                                targetScrollSpeed = maxSpeed * ratio;
+                            } else {
+                                targetScrollSpeed = 0;
+                            }
+                        } else {
+                            targetScrollSpeed = 0;
+                        }
+
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.05;
+
+                        if (Math.abs(currentScrollSpeed) > 0.01) {
+                            trackPos += currentScrollSpeed;
+                            const scrollWidth = navItems.scrollWidth;
+                            const singleSetWidth = scrollWidth / 3;
+
+                            if (trackPos >= singleSetWidth) {
+                                trackPos -= singleSetWidth;
+                            } else if (trackPos < 0) {
+                                trackPos += singleSetWidth;
+                            }
+
+                            navItems.style.transform = `translateX(-${trackPos}px)`;
+                        }
+                        requestAnimationFrame(navLoop);
+                    }
+                    navLoop();
+                }
+            }
+
+            // Form Submit handler utilizing the existing Netlify function
+            document.getElementById('project-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const btn = document.getElementById('submit-btn');
+                const statusDiv = document.getElementById('form-status');
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const budget = document.getElementById('budget').value;
+                const message = document.getElementById('needs').value;
+
+                // Split name for airtable compatibility
+                const nameParts = name.trim().split(' ');
+                const firstName = nameParts[0];
+                const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : ' ';
+
+                const formData = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    message: "BUDGET: " + budget + "\n\nNEEDS: " + message,
+                    source_site: "Liewright Services / Hire Me"
+                };
+
+                btn.textContent = "Sending...";
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch('/.netlify/functions/submitTicket', {
+                        method: 'POST',
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (response.ok) {
+                        statusDiv.textContent = "Thanks! I'll get back to you shortly.";
+                        statusDiv.className = "form-message success";
+                        document.getElementById('project-form').reset();
+                    } else {
+                        statusDiv.textContent = "Oops! Something went wrong. Please try again or email me directly.";
+                        statusDiv.className = "form-message error";
+                    }
+                } catch (error) {
+                    statusDiv.textContent = "Connection error. Please try again later.";
+                    statusDiv.className = "form-message error";
+                } finally {
+                    btn.textContent = "👉 Start My Project";
+                    btn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
