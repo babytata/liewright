@@ -9,10 +9,10 @@ exports.handler = async (event, context) => {
     try {
         const data = JSON.parse(event.body);
 
-        const { first_name, last_name, email, device_version, issue_type, source_site, message } = data;
+        const { first_name, last_name, email, device_version, issue_type, source_site, message, location } = data;
 
         // Validate inputs
-        if (!first_name || !last_name || !email || !message) {
+        if (!first_name || !last_name || !email || !message || !location) {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ error: "Missing required fields" }),
@@ -30,6 +30,7 @@ exports.handler = async (event, context) => {
             "Last Name": last_name,
             "Email": email,
             "Message": message,
+            "Location": location,
         };
 
         // Optional fields — only include if provided

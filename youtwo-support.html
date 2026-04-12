@@ -150,6 +150,7 @@
         }
 
         .form-group input,
+        .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 12px 15px;
@@ -162,7 +163,13 @@
             transition: border-color 0.3s ease, background 0.3s ease;
         }
 
+        .form-group select option {
+            background: var(--dark);
+            color: var(--light);
+        }
+
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
@@ -224,7 +231,10 @@
 
         <div class="contact-form">
             <!-- The form configured for Netlify automatically -->
-            <form name="youtwo-support" id="youtwo-support-form" method="POST" data-netlify="true">
+            <form name="youtwo-support" id="youtwo-support-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <p style="display: none;">
+                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </p>
                 <div style="display: flex; gap: 15px;">
                     <div class="form-group" style="flex: 1;">
                         <label for="first_name">First Name</label>
@@ -244,9 +254,26 @@
                     <input type="text" id="device_version" name="device_version" placeholder="e.g., iOS 17, iPhone 15 Pro">
                 </div>
                 <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location" required>
+                        <option value="" disabled selected>Select your country...</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Japan">Japan</option>
+                        <option value="India">India</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="6" required placeholder="Describe your issue or provide feedback..."></textarea>
                 </div>
+                <div data-netlify-recaptcha="true" style="margin-bottom: 20px;"></div>
                 <button type="submit" class="form-submit">Send Message</button>
                 <div id="form-status" class="form-message" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px; text-align: center;"></div>
             </form>
@@ -276,6 +303,7 @@
                         first_name: document.getElementById('first_name').value,
                         last_name: document.getElementById('last_name').value,
                         email: document.getElementById('email').value,
+                        location: document.getElementById('location').value,
                         device_version: document.getElementById('device_version').value,
                         message: document.getElementById('message').value
                     };
