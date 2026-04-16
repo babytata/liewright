@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rooster Cleaning | Professional Cleaning Services in Atlanta, GA</title>
+    <meta name="description" content="Residential, move-out, and office cleaning in Atlanta and surrounding areas. Solo operator, flexible scheduling, no subcontractors. Text for a fast quote." />
+    <meta name="keywords" content="house cleaning Atlanta, move-out cleaning Atlanta, residential cleaning near me, deep cleaning service Atlanta" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Rooster Cleaning | Professional Cleaning Services in Atlanta, GA" />
+    <meta property="og:description" content="Residential, move-out, and office cleaning in Atlanta and surrounding areas. Solo operator, flexible scheduling, no subcontractors." />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+            font-weight: 400;
+            color: #333;
+            background: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            --primary: #A32D2D;
+            --primary-dark: #791F1F;
+            --primary-glow: rgba(163, 45, 45, 0.15);
+            --bg-dark: #1a1a1a;
+            --bg-dark-lighter: #242424;
+            --bg-white: #ffffff;
+            --bg-offwhite: #F7F4F0;
+            --text-dark: #1a1a1a;
+            --text-light: #f0f0f0;
+            --text-muted: #888;
+            --border-light: #e0e0e0;
+            --font-display: 'Oswald', sans-serif;
+            --font-body: 'Source Sans 3', sans-serif;
+            --max-width: 1100px;
+            --section-padding: 80px 24px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTAINER ===== */
+        .rc-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== SECTION DIVIDERS ===== */
+        .rc-section {
+            border-bottom: 0.5px solid var(--border-light);
+        }
+
+        /* ===== SECTION 1 — NAVIGATION ===== */
+        .rc-nav {
+            background: var(--bg-dark);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .rc-nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .rc-wordmark {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .rc-wordmark span {
+            color: var(--primary);
+        }
+
+        .rc-wordmark:hover {
+            color: var(--primary);
+        }
+
+        .rc-nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .rc-nav-links a {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .rc-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .rc-nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .rc-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile nav toggle */
+        .rc-nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .rc-nav-toggle span {
+            width: 100%;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        /* ===== SECTION 2 — HERO ===== */
+        .rc-hero {
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rc-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow), transparent 70%);
+            pointer-events: none;
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { opacity: 0.4; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0.8; transform: translate(-40px, 40px) scale(1.2); }
+        }
+
+        .rc-hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 100px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rc-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--text-light);
+            margin-bottom: 16px;
+            letter-spacing: 0.03em;
+        }
+
+        .rc-hero h1 em {
+            color: var(--primary);
+            font-style: normal;
+        }
+
+        .rc-hero-subtitle {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .rc-hero-subtitle span {
+            margin: 0 8px;
+            color: #555;
+        }
+
+        .rc-hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+
+        /* Buttons */
+        .rc-btn {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 14px 32px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .rc-btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .rc-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(163, 45, 45, 0.3);
+        }
+
+        .rc-btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid #555;
+        }
+
+        .rc-btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Tagline bar */
+        .rc-tagline-bar {
+            background: var(--bg-dark-lighter);
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .rc-tagline-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .rc-tagline-item {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rc-tagline-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            display: inline-block;
+        }
+
+        /* ===== SECTION 3 — SERVICES ===== */
+        .rc-services {
+            padding: var(--section-padding);
+            background: var(--bg-white);
+        }
+
+        .rc-section-label {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: var(--primary);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .rc-section-heading {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--text-dark);
+            margin-bottom: 48px;
+        }
+
+        .rc-services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .rc-service-card {
+            background: var(--bg-offwhite);
+            padding: 32px;
+            border-left: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .rc-service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .rc-service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at top right, var(--primary-glow), transparent 70%);
+            pointer-events: none;
+        }
+
+        .rc-service-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .rc-service-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .rc-service-icon {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .rc-addons {
+            background: var(--bg-offwhite);
+            padding: 20px 28px;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .rc-addons-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dark);
+        }
+
+        .rc-addon-item {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rc-addon-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* ===== SECTION 4 — WHY ROOSTER ===== */
+        .rc-why {
+            padding: var(--section-padding);
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .rc-why .rc-section-heading {
+            color: var(--text-light);
+        }
+
+        .rc-why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .rc-why-card {
+            position: relative;
+        }
+
+        .rc-why-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .rc-why-card h3 {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .rc-why-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== SECTION 5 — PRICING ===== */
+        .rc-pricing {
+            padding: var(--section-padding);
+            background: var(--bg-white);
+        }
+
+        .rc-pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        .rc-pricing-table thead th {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            padding: 16px 20px;
+            text-align: left;
+        }
+
+        .rc-pricing-table thead th:first-child {
+            padding-left: 24px;
+        }
+
+        .rc-pricing-table tbody tr {
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.2s;
+        }
+
+        .rc-pricing-table tbody tr:hover {
+            background: var(--bg-offwhite);
+        }
+
+        .rc-pricing-table tbody td {
+            padding: 18px 20px;
+            font-size: 0.95rem;
+        }
+
+        .rc-pricing-table tbody td:first-child {
+            font-weight: 600;
+            color: var(--text-dark);
+            padding-left: 24px;
+            border-left: 3px solid transparent;
+        }
+
+        .rc-pricing-table tbody tr:hover td:first-child {
+            border-left-color: var(--primary);
+        }
+
+        .rc-pricing-table .rc-price-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .rc-pricing-table .rc-price-range {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .rc-pricing-table .rc-addon-row td {
+            color: #888;
+            font-style: italic;
+        }
+
+        .rc-pricing-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        /* ===== SECTION 6 — CONTACT ===== */
+        .rc-contact {
+            padding: var(--section-padding);
+            background: var(--bg-offwhite);
+        }
+
+        .rc-contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .rc-contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .rc-contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-white);
+            border-left: 3px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .rc-contact-method:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .rc-contact-method-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .rc-contact-method-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .rc-contact-method-badge {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .rc-contact-method a {
+            font-size: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .rc-contact-method a:hover {
+            color: var(--primary-dark);
+        }
+
+        .rc-contact-method-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Form */
+        .rc-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rc-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .rc-form-group label {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dark);
+        }
+
+        .rc-form-group input,
+        .rc-form-group select,
+        .rc-form-group textarea {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-white);
+            color: var(--text-dark);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .rc-form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .rc-form-group input:focus,
+        .rc-form-group select:focus,
+        .rc-form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .rc-form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rc-form .rc-btn {
+            align-self: flex-start;
+            width: auto;
+        }
+
+        /* Honeypot */
+        .rc-hp { position: absolute; left: -9999px; }
+
+        /* ===== SECTION 7 — SERVICE AREA ===== */
+        .rc-area {
+            padding: var(--section-padding);
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .rc-area .rc-section-heading {
+            color: var(--text-light);
+        }
+
+        .rc-area p {
+            max-width: 700px;
+            margin: 0 auto 32px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .rc-area-cities {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .rc-area-city {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 20px;
+            border: 1px solid #333;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .rc-area-city:hover {
+            border-color: var(--primary);
+            color: var(--text-light);
+        }
+
+        /* ===== FOOTER ===== */
+        .rc-footer {
+            background: var(--bg-dark);
+            border-top: 2px solid var(--primary);
+            padding: 40px 24px 24px;
+        }
+
+        .rc-footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .rc-footer-brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-light);
+            letter-spacing: 0.06em;
+        }
+
+        .rc-footer-brand span {
+            color: var(--primary);
+        }
+
+        .rc-footer-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .rc-footer-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .rc-footer-info a:hover {
+            color: var(--primary);
+        }
+
+        .rc-footer-copyright {
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .rc-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .rc-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .rc-stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .rc-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+        .rc-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .rc-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+        .rc-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+
+        .rc-stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 56px 20px;
+            }
+
+            /* Nav */
+            .rc-nav-toggle {
+                display: flex;
+            }
+
+            .rc-nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 2px solid var(--primary);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            }
+
+            .rc-nav-links.open {
+                display: flex;
+            }
+
+            .rc-nav-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .rc-nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .rc-nav-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            /* Hero */
+            .rc-hero-inner {
+                padding: 64px 20px 56px;
+            }
+
+            .rc-hero-subtitle span {
+                display: none;
+            }
+
+            .rc-hero-subtitle {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                font-size: 0.95rem;
+            }
+
+            .rc-tagline-inner {
+                gap: 20px;
+            }
+
+            /* Services */
+            .rc-services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Why */
+            .rc-why-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            /* Pricing */
+            .rc-pricing-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .rc-pricing-table {
+                min-width: 540px;
+            }
+
+            /* Contact */
+            .rc-contact-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            /* Area */
+            .rc-area-cities {
+                gap: 12px;
+            }
+
+            .rc-area-city {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+
+            /* Footer */
+            .rc-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rc-hero h1 {
+                font-size: 2rem;
+            }
+
+            .rc-hero-ctas {
+                flex-direction: column;
+            }
+
+            .rc-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .rc-tagline-inner {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== SECTION 1 — NAVIGATION ===== -->
+    <nav class="rc-nav" id="rc-nav">
+        <div class="rc-nav-inner">
+            <a href="#" class="rc-wordmark">ROOSTER</a>
+            <button class="rc-nav-toggle" id="rc-nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="rc-nav-links" id="rc-nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== SECTION 2 — HERO ===== -->
+    <section class="rc-hero" id="hero">
+        <div class="rc-hero-inner">
+            <h1>Professional Cleaning, <em>Done Right.</em></h1>
+            <div class="rc-hero-subtitle">
+                <span aria-hidden="true">·</span>Residential
+                <span aria-hidden="true">·</span>Move-Out
+                <span aria-hidden="true">·</span>Office Cleaning
+                <span aria-hidden="true">·</span>Atlanta Area
+            </div>
+            <div class="rc-hero-ctas">
+                <a href="sms:+1XXXXXXXXXX" class="rc-btn rc-btn-primary" id="cta-text-hero">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Text for a Quote
+                </a>
+                <a href="#contact" class="rc-btn rc-btn-secondary" id="cta-contact-hero">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tagline Bar -->
+    <div class="rc-tagline-bar">
+        <div class="rc-tagline-inner">
+            <div class="rc-tagline-item">Solo Operator</div>
+            <div class="rc-tagline-item">No Subcontractors</div>
+            <div class="rc-tagline-item">Flexible Scheduling</div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 3 — SERVICES ===== -->
+    <section class="rc-services rc-section" id="services">
+        <div class="rc-container">
+            
+            <h2 class="rc-section-heading rc-reveal">Services</h2>
+
+            <div class="rc-services-grid rc-stagger rc-reveal">
+                <div class="rc-service-card">
+                    <span class="rc-service-icon" aria-hidden="true">🏠</span>
+                    <h3>Residential Cleaning</h3>
+                    <p>Regular home cleaning — kitchens, bathrooms, floors, surfaces. Consistent results every visit.</p>
+                </div>
+                <div class="rc-service-card">
+                    <span class="rc-service-icon" aria-hidden="true">📦</span>
+                    <h3>Apartment / Move-Out</h3>
+                    <p>Leave it lease-end ready. Full clean before handing over the keys.</p>
+                </div>
+                <div class="rc-service-card">
+                    <span class="rc-service-icon" aria-hidden="true">✨</span>
+                    <h3>Deep Cleaning</h3>
+                    <p>Top-to-bottom detail. Baseboards, inside cabinets, the works.</p>
+                </div>
+                <div class="rc-service-card">
+                    <span class="rc-service-icon" aria-hidden="true">🏢</span>
+                    <h3>Office Cleaning</h3>
+                    <p>Small office spaces. Professional, discreet, consistent.</p>
+                </div>
+            </div>
+
+            <div class="rc-addons rc-reveal">
+                <span class="rc-addons-label">Add-Ons:</span>
+                <span class="rc-addon-item">Fridge Cleaning <span class="rc-addon-price">+$35</span></span>
+                <span class="rc-addon-item">Oven Cleaning <span class="rc-addon-price">+$35</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4 — WHY ROOSTER ===== -->
+    <section class="rc-why rc-section" id="why">
+        <div class="rc-container">
+            <div class="rc-section-label" style="color: var(--primary);">Why Choose Us</div>
+            <h2 class="rc-section-heading rc-reveal">Why Rooster</h2>
+
+            <div class="rc-why-grid rc-stagger rc-reveal">
+                <div class="rc-why-card">
+                    <div class="rc-why-num">01</div>
+                    <h3>You deal with me directly</h3>
+                    <p>No crew, no subcontractors. Same person every time. You know exactly who's showing up.</p>
+                </div>
+                <div class="rc-why-card">
+                    <div class="rc-why-num">02</div>
+                    <h3>Flexible on scheduling</h3>
+                    <p>Morning or evening slots available. Timing worked out together — no rigid booking windows.</p>
+                </div>
+                <div class="rc-why-card">
+                    <div class="rc-why-num">03</div>
+                    <h3>I travel to you</h3>
+                    <p>Based in Atlanta. Willing to travel 100+ miles. Not sure if you're in range? Just ask.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 5 — PRICING ===== -->
+    <section class="rc-pricing rc-section" id="pricing">
+        <div class="rc-container">
+            
+            <h2 class="rc-section-heading rc-reveal">Pricing</h2>
+
+            <div class="rc-pricing-table-wrapper rc-reveal">
+                <table class="rc-pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Starting Price</th>
+                            <th>Atlanta Market Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic Cleaning (1–2 bed)</td>
+                            <td><span class="rc-price-value">$100</span></td>
+                            <td><span class="rc-price-range">$80–$150</span></td>
+                        </tr>
+                        <tr>
+                            <td>Basic Cleaning (3–4 bed)</td>
+                            <td><span class="rc-price-value">$150</span></td>
+                            <td><span class="rc-price-range">$130–$200</span></td>
+                        </tr>
+                        <tr>
+                            <td>Deep Cleaning</td>
+                            <td><span class="rc-price-value">$200</span></td>
+                            <td><span class="rc-price-range">$185–$350</span></td>
+                        </tr>
+                        <tr>
+                            <td>Move-Out Cleaning</td>
+                            <td><span class="rc-price-value">$175</span></td>
+                            <td><span class="rc-price-range">$150–$300</span></td>
+                        </tr>
+                        <tr>
+                            <td>Office Cleaning</td>
+                            <td><span class="rc-price-value">$120</span></td>
+                            <td><span class="rc-price-range">$100–$200</span></td>
+                        </tr>
+                        <tr class="rc-addon-row">
+                            <td>Fridge Cleaning (add-on)</td>
+                            <td><span class="rc-price-value">+$35</span></td>
+                            <td><span class="rc-price-range">$20–$50</span></td>
+                        </tr>
+                        <tr class="rc-addon-row">
+                            <td>Oven Cleaning (add-on)</td>
+                            <td><span class="rc-price-value">+$35</span></td>
+                            <td><span class="rc-price-range">$20–$50</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="rc-pricing-note rc-reveal">Final price depends on home size and condition. Contact us for a free quote — no obligation.</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 6 — CONTACT ===== -->
+    <section class="rc-contact rc-section" id="contact">
+        <div class="rc-container">
+            <div class="rc-section-label">Get Started</div>
+            <h2 class="rc-section-heading rc-reveal">Contact</h2>
+
+            <div class="rc-contact-layout">
+                <!-- Contact Methods -->
+                <div class="rc-contact-methods rc-stagger rc-reveal">
+                    <div class="rc-contact-method">
+                        
+                        <div>
+                            <div class="rc-contact-method-label">
+                                Text
+                                <span class="rc-contact-method-badge">Fastest Response</span>
+                            </div>
+                            <a href="sms:+1XXXXXXXXXX" id="contact-text-link">Send a text →</a>
+                        </div>
+                    </div>
+
+                    <div class="rc-contact-method">
+                        
+                        <div>
+                            <div class="rc-contact-method-label">Call</div>
+                            <a href="tel:+1XXXXXXXXXX" id="contact-call-link">Call us →</a>
+                        </div>
+                    </div>
+
+                    <div class="rc-contact-method">
+                        
+                        <div>
+                            <div class="rc-contact-method-label">Email</div>
+                            <a href="#" id="contact-email-link" class="rc-email-protected" data-user="contact" data-domain="roostercleaning.com">Loading…</a>
+                            <div class="rc-contact-method-note">We'll respond within 24 hours</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form class="rc-form rc-reveal" id="rc-contact-form">
+                    <div class="rc-hp">
+                        <label>Don't fill this out: <input name="rc-bot-field" id="rc-bot-field" /></label>
+                    </div>
+
+                    <div class="rc-form-group">
+                        <label for="rc-name">Name</label>
+                        <input type="text" id="rc-name" name="name" required autocomplete="name" />
+                    </div>
+
+                    <div class="rc-form-group">
+                        <label for="rc-phone">Phone Number</label>
+                        <input type="tel" id="rc-phone" name="phone" required autocomplete="tel" />
+                    </div>
+
+                    <div class="rc-form-group">
+                        <label for="rc-service">Service Needed</label>
+                        <select id="rc-service" name="service" required>
+                            <option value="" disabled selected>Select a service…</option>
+                            <option value="Residential">Residential</option>
+                            <option value="Move-Out">Move-Out</option>
+                            <option value="Deep Clean">Deep Clean</option>
+                            <option value="Office">Office</option>
+                            <option value="Not sure yet">Not sure yet</option>
+                        </select>
+                    </div>
+
+                    <div class="rc-form-group">
+                        <label for="rc-message">Message</label>
+                        <textarea id="rc-message" name="message" placeholder="Tell me about the space — size, location, anything specific you need." required></textarea>
+                    </div>
+
+                    <button type="submit" class="rc-btn rc-btn-primary" id="rc-submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 7 — SERVICE AREA ===== -->
+    <section class="rc-area" id="area">
+        <div class="rc-container">
+            <div class="rc-section-label" style="color: var(--primary);">Coverage</div>
+            <h2 class="rc-section-heading rc-reveal">Service Area</h2>
+
+            <p class="rc-reveal">Based in Atlanta, GA (30354). Serving the metro area and surrounding cities. Willing to travel 100+ miles. Not sure if you're in range? Text us and we'll figure it out.</p>
+
+            <div class="rc-area-cities rc-stagger rc-reveal">
+                <span class="rc-area-city">Atlanta</span>
+                <span class="rc-area-city">Athens</span>
+                <span class="rc-area-city">Macon</span>
+                <span class="rc-area-city">Columbus</span>
+                <span class="rc-area-city">Gainesville</span>
+                <span class="rc-area-city">& Beyond</span>
+            </div>
+
+            <a href="sms:+1XXXXXXXXXX" class="rc-btn rc-btn-primary" id="cta-text-area">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Text Us
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="rc-footer">
+        <div class="rc-footer-inner">
+            <div class="rc-footer-brand">ROOSTER</div>
+            <div class="rc-footer-info">
+                Atlanta, GA ·
+                <a href="sms:+1XXXXXXXXXX">Text</a> ·
+                <a href="tel:+1XXXXXXXXXX">Call</a> ·
+                <a href="#" class="rc-email-protected" data-user="contact" data-domain="roostercleaning.com">Email</a>
+            </div>
+        </div>
+        <div class="rc-footer-copyright">
+            © 2026 Rooster Cleaning. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // === Mobile Nav Toggle ===
+            const navToggle = document.getElementById('rc-nav-toggle');
+            const navLinks = document.getElementById('rc-nav-links');
+
+            navToggle.addEventListener('click', function() {
+                navToggle.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+
+            // Close mobile nav on link click
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navToggle.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // === Scroll Reveal Animations ===
+            const revealElements = document.querySelectorAll('.rc-reveal');
+
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            // === Email Obfuscation ===
+            // Reconstructs email from data attributes to prevent scraping
+            document.querySelectorAll('.rc-email-protected').forEach(function(el) {
+                const user = el.getAttribute('data-user');
+                const domain = el.getAttribute('data-domain');
+                if (user && domain) {
+                    const email = user + '@' + domain;
+                    el.href = 'mailto:' + email;
+                    el.textContent = email;
+                }
+            });
+
+            // === Phone Number Obfuscation ===
+            // Phone numbers use placeholder +1XXXXXXXXXX
+            // Replace with actual number when ready. The sms: and tel: links
+            // will only work once a real number is set.
+            //
+            // To update, find-and-replace "+1XXXXXXXXXX" with your real number.
+            // For additional privacy, you can use a Google Voice number instead
+            // of your personal number.
+
+            // === Form Submission ===
+            const form = document.getElementById('rc-contact-form');
+            const submitBtn = document.getElementById('rc-submit-btn');
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Honeypot check
+                    const honeypot = document.getElementById('rc-bot-field');
+                    if (honeypot && honeypot.value) return;
+
+                    // Basic validation
+                    const name = document.getElementById('rc-name').value.trim();
+                    const phone = document.getElementById('rc-phone').value.trim();
+                    const service = document.getElementById('rc-service').value;
+                    const message = document.getElementById('rc-message').value.trim();
+
+                    if (!name || !phone || !service || !message) {
+                        return;
+                    }
+
+                    // Disable button
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'SENDING…';
+
+                    // Submit to Airtable via Netlify Function
+                    fetch('/.netlify/functions/submitRoosterLead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, phone, service, message })
+                    })
+                    .then(function(response) {
+                        if (response.ok) {
+                            submitBtn.textContent = 'SENT ✓';
+                            submitBtn.style.background = '#2d7a2d';
+                            form.reset();
+                            setTimeout(function() {
+                                submitBtn.disabled = false;
+                                submitBtn.textContent = 'SEND MESSAGE';
+                                submitBtn.style.background = '';
+                            }, 3000);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    })
+                    .catch(function() {
+                        submitBtn.textContent = 'ERROR — TRY AGAIN';
+                        submitBtn.style.background = '#c0392b';
+                        submitBtn.disabled = false;
+                        setTimeout(function() {
+                            submitBtn.textContent = 'SEND MESSAGE';
+                            submitBtn.style.background = '';
+                        }, 3000);
+                    });
+                });
+            }
+
+            // === Active nav link highlighting on scroll ===
+            const sections = document.querySelectorAll('section[id]');
+            const navAnchors = document.querySelectorAll('.rc-nav-links a[href^="#"]');
+
+            window.addEventListener('scroll', function() {
+                let current = '';
+                sections.forEach(function(section) {
+                    const sectionTop = section.offsetTop - 100;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navAnchors.forEach(function(a) {
+                    a.style.color = '';
+                    if (a.getAttribute('href') === '#' + current) {
+                        a.style.color = 'var(--text-light)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
