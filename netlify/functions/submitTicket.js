@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     try {
         const data = JSON.parse(event.body);
 
-        const { first_name, last_name, email, device_version, issue_type, source_site, message, location } = data;
+        const { first_name, last_name, email, device_version, issue_type, source_site, message, location, budget } = data;
 
         // Validate inputs
         if (!first_name || !last_name || !email || !message || !location) {
@@ -37,6 +37,7 @@ exports.handler = async (event, context) => {
         if (device_version) fields["Device / Version"] = device_version;
         if (issue_type) fields["Issue Type"] = issue_type;
         if (source_site) fields["Source Site"] = source_site;
+        if (budget) fields["Budget"] = budget;
 
         const response = await fetch(url, {
             method: "POST",
