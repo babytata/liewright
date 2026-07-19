@@ -299,9 +299,16 @@
                     formStatus.style.display = 'none';
                     formStatus.className = 'form-message'; // Reset
                     
-                    // Enforce recaptcha client-side
-                    const recaptchaResponse = document.querySelector('[name="g-recaptcha-response"]');
-                    if (!recaptchaResponse || !recaptchaResponse.value) {
+                    // Enforce recaptcha client-side using Google's API
+                    let recaptchaPassed = false;
+                    try {
+                        if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse && grecaptcha.getResponse().length > 0) {
+                            recaptchaPassed = true;
+                        }
+                    } catch (err) {
+                        recaptchaPassed = false;
+                    }
+                    if (!recaptchaPassed) {
                         formStatus.textContent = "Please check the 'I am not a robot' box before submitting.";
                         formStatus.className = "form-message error";
                         formStatus.style.display = "block";

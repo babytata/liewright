@@ -998,9 +998,16 @@
                 const btn = document.getElementById('submit-btn');
                 const statusDiv = document.getElementById('form-status');
                 
-                // Enforce recaptcha client-side
-                const recaptchaResponse = document.querySelector('[name="g-recaptcha-response"]');
-                if (!recaptchaResponse || !recaptchaResponse.value) {
+                // Enforce recaptcha client-side using Google's API
+                let recaptchaPassed = false;
+                try {
+                    if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse && grecaptcha.getResponse().length > 0) {
+                        recaptchaPassed = true;
+                    }
+                } catch (err) {
+                    recaptchaPassed = false;
+                }
+                if (!recaptchaPassed) {
                     statusDiv.textContent = "Please check the 'I am not a robot' box before submitting.";
                     statusDiv.className = "form-message error";
                     statusDiv.style.display = "block";
