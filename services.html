@@ -999,10 +999,11 @@
                 const statusDiv = document.getElementById('form-status');
                 
                 // Enforce recaptcha client-side
-                const recaptchaResponse = document.querySelector('#project-form [name="g-recaptcha-response"]');
-                if (recaptchaResponse && !recaptchaResponse.value) {
+                const recaptchaResponse = document.querySelector('[name="g-recaptcha-response"]');
+                if (!recaptchaResponse || !recaptchaResponse.value) {
                     statusDiv.textContent = "Please check the 'I am not a robot' box before submitting.";
                     statusDiv.className = "form-message error";
+                    statusDiv.style.display = "block";
                     return;
                 }
                 
