@@ -998,6 +998,14 @@
                 const btn = document.getElementById('submit-btn');
                 const statusDiv = document.getElementById('form-status');
                 
+                // Enforce recaptcha client-side
+                const recaptchaResponse = document.querySelector('#project-form [name="g-recaptcha-response"]');
+                if (recaptchaResponse && !recaptchaResponse.value) {
+                    statusDiv.textContent = "Please check the 'I am not a robot' box before submitting.";
+                    statusDiv.className = "form-message error";
+                    return;
+                }
+                
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const budget = document.getElementById('budget').value;
@@ -1015,7 +1023,9 @@
                     email: email,
                     location: location,
                     message: "BUDGET: " + budget + "\n\nNEEDS: " + message,
-                    source_site: "Liewright Services / Hire Me"
+                    source_site: "Liewright Services / Hire Me",
+                    budget: budget,
+                    needs: message
                 };
 
                 btn.textContent = "Sending...";
