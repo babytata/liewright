@@ -943,7 +943,7 @@
                     let isNavMouseOver = false;
                     let mouseX = 0;
 
-                    carousel.addEventListener("mouseenter", () => isNavMouseOver = true);
+                    carousel.addEventListener("mouseenter", (e) => { isNavMouseOver = true; mouseX = e.clientX; currentScrollSpeed = 0; targetScrollSpeed = 0; });
                     carousel.addEventListener("mouseleave", () => { isNavMouseOver = false; });
                     carousel.addEventListener("mousemove", (e) => { mouseX = e.clientX; });
 

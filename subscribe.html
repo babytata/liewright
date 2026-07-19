@@ -304,8 +304,7 @@
                         <li><a href="illustration.html">Illustration</a></li>
                         <li><a href="photography.html">Photography</a></li>
                         <li><a href="services.html">Hire Me</a></li>
-                        <li><a href="services.html">Hire Me</a>
-                <a href="about.html">About Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="https://shop.liewright.com" target="_blank">Shop</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -412,7 +411,7 @@
                     let isNavMouseOver = false;
                     let mouseX = 0;
 
-                    carousel.addEventListener('mouseenter', () => isNavMouseOver = true);
+                    carousel.addEventListener('mouseenter', (e) => { isNavMouseOver = true; mouseX = e.clientX; currentScrollSpeed = 0; targetScrollSpeed = 0; });
                     carousel.addEventListener('mouseleave', () => {
                         isNavMouseOver = false;
                     });
