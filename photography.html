@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Photography - Liewright</title>
     <style>
+        /* Base / Navigation Styles (Preserved & Standardized) */
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: #111;
@@ -13,11 +14,6 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
         header {
             background: #1c1c1c;
@@ -97,127 +93,320 @@
             background-color: #bbbdbf;
             color: #111;
         }
-        .scroll-btn {
-            background: transparent;
-            border: none;
-            color: #bdccd4;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 3;
-            padding: 0 10px;
+        
+        /* Mobile Navigation Rules (Preserved) */
+        .mobile-logo-link { display: none; }
+        .mobile-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; margin-left: auto; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; }
+        .hamburger-line { width: 100%; height: 2px; background-color: #bdccd4; transition: all 0.3s ease; }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: flex; }
+            nav { flex-wrap: wrap; position: relative; }
+            .nav-carousel, .nav-carousel-container { display: none; width: 100%; }
+            nav.active .nav-carousel, nav.active .nav-carousel-container { display: flex; position: absolute; top: 100%; left: 0; right: 0; width: 100vw; background-color: #1c1c1c; flex-direction: column; align-items: center; padding: 20px 0; border-bottom: 2px solid #bbbdbf; z-index: 1000; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); overflow: visible; }
+            nav.active .nav-items-container { overflow: visible; display: flex; justify-content: center; width: 100%; }
+            nav.active .nav-items { display: flex; flex-direction: column; width: 100%; transform: none !important; animation: none; gap: 20px; text-align: center; justify-content: center; overflow: visible; }
+            nav.active .scroll-btn { display: none; }
+            nav.active .nav-items > li, nav.active .nav-items > a { display: block; width: 100%; }
+            
+            .mobile-logo-link { display: block; margin-right: 15px; margin-left: auto; }
+            .mobile-logo { height: 20px; vertical-align: middle; }
+            .nav-clone { display: none !important; }
+            .nav-items a.logo { display: none !important; }
+            .nav-items li:has(a.logo) { display: none !important; }
+            .mobile-menu-btn { margin-left: 15px !important; margin-right: auto !important; }
         }
-        .scroll-btn:hover {
-            color: #bbbdbf;
+
+        /* --- Editorial Layout Styles (PrintMag Inspiration) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..900;1,6..72,300..900&family=Inter:wght@300..900&display=swap');
+
+        .article-page {
+            background-color: #f8f7f5;
+            color: #1a1a1a;
+            padding-bottom: 5rem;
+            font-family: 'Newsreader', serif;
+            font-size: 1.25rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
         }
-        .scroll-btn.prev {
-            margin-right: 10px;
+        
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
         }
-        .scroll-btn.next {
-            margin-left: 10px;
-        }
-        h1 {
-            font-size: 2.8rem;
-            letter-spacing: 1px;
-            font-weight: 700;
-            color: #bbbdbf;
-            text-align: center;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-        .gallery-section {
+
+        .article-header {
             margin-bottom: 3rem;
-        }
-        .gallery-row {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        .gallery-row-title {
-            font-size: 1.4rem;
-            color: #bbbdbf;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        .gallery-container {
-            position: relative;
-            overflow-x: auto;
-            overflow-y: hidden;
-            padding: 10px 0;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .gallery-container::-webkit-scrollbar {
-            height: 8px;
-        }
-        .gallery-container::-webkit-scrollbar-track {
-            background: #1c1c1c;
-        }
-        .gallery-container::-webkit-scrollbar-thumb {
-            background: #555;
-            border-radius: 4px;
-        }
-        .gallery-container::-webkit-scrollbar-thumb:hover {
-            background: #777;
-        }
-        .gallery-items {
-            display: flex;
-            gap: 15px;
-            padding: 0 10px;
-        }
-        .gallery-item {
-            flex-shrink: 0;
-            width: 280px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover {
-            transform: scale(1.05);
-            z-index: 2;
-        }
-        .gallery-thumbnail {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 4px;
-            background: #1c1c1c;
-            border: 2px solid #333;
-            transition: border-color 0.3s ease;
-        }
-        .gallery-item:hover .gallery-thumbnail {
-            border-color: #bbbdbf;
-        }
-        .gallery-item-title {
-            margin-top: 10px;
-            font-size: 0.95rem;
-            color: #ccc;
             text-align: center;
         }
 
-        /* Ad Slot Styles */
-        .ad-slot .gallery-thumbnail {
-            background: #222;
-            border: 2px dashed #444;
+        .article-category {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #d21b02; /* Red accent matching PrintMag styling */
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .article-title {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: #111;
+            margin-top: 0.5rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .article-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0dfdb;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .article-meta-item::after {
+            content: "•";
+            margin-left: 15px;
+            color: #ccc;
+        }
+        .article-meta-item:last-child::after {
+            content: "";
+        }
+
+        .article-lead {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: #222;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .article-body p {
+            margin-top: 0;
+            margin-bottom: 1.75rem;
+            text-align: justify;
+        }
+
+        /* Image Wrapper with Guard Overlay */
+        .image-wrapper {
+            position: relative;
+            margin: 3.5rem 0;
+            width: 100%;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 4px;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+            pointer-events: none; /* Block default drag-and-drop */
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Transparent cover to block drag, contextmenu, and text-selection on images */
+        .image-guard {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: transparent;
+        }
+
+        .image-caption {
+            font-family: 'Newsreader', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: #555;
+            text-align: center;
+            margin-top: -2.5rem;
+            margin-bottom: 3.5rem;
+            line-height: 1.4;
+        }
+
+        /* Fullscreen Lightbox Styles */
+        #lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(10, 10, 10, 0.98);
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        .ad-slot:hover .gallery-thumbnail {
-            border-color: #666;
-            color: #888;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
 
-        /* Footer Updates */
+        #lightbox-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image-wrapper {
+            position: relative;
+            max-width: 90%;
+            max-height: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 2px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+            pointer-events: none;
+        }
+
+        /* Hover-Revealed Controls */
+        .lightbox-control {
+            position: absolute;
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, opacity 0.3s ease, visibility 0.3s ease, transform 0.2s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 10002;
+            width: 56px;
+            height: 56px;
+        }
+
+        .lightbox-control:hover {
+            background: #d21b02;
+            border-color: #d21b02;
+            transform: scale(1.08);
+        }
+
+        /* Show active state on mouse movement */
+        #lightbox-modal.controls-visible .lightbox-control {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #lightbox-close {
+            top: 30px;
+            right: 30px;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        #lightbox-prev {
+            left: 30px;
+            font-size: 1.5rem;
+        }
+
+        #lightbox-next {
+            right: 30px;
+            font-size: 1.5rem;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Newsreader', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 80%;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #lightbox-modal.controls-visible .lightbox-caption {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 30px 15px;
+            }
+            .article-title {
+                font-size: 2.1rem;
+            }
+            .article-lead {
+                font-size: 1.25rem;
+                margin-bottom: 2rem;
+            }
+            .image-wrapper {
+                margin: 2.5rem 0;
+            }
+            .image-caption {
+                margin-bottom: 2.5rem;
+            }
+            .lightbox-control {
+                width: 46px;
+                height: 46px;
+            }
+            #lightbox-prev { left: 15px; }
+            #lightbox-next { right: 15px; }
+            #lightbox-close { top: 15px; right: 15px; }
+        }
+
+        /* Standardized Footer Custom Overrides for Light Theme */
         footer {
-            margin-top: 3rem;
+            background: #1c1c1c;
+            margin-top: 0;
             font-size: 0.9rem;
             color: #555;
             text-align: center;
             border-top: 1px solid #333;
             padding: 40px 20px;
         }
-        
         .footer-content {
             max-width: 900px;
             margin: 0 auto 30px auto;
@@ -227,7 +416,6 @@
             flex-wrap: wrap;
             align-items: flex-start;
         }
-
         .footer-col {
             margin: 0 20px;
             min-width: 120px;
@@ -247,8 +435,6 @@
         .footer-col a:hover {
             color: #bbbdbf;
         }
-        
-        /* Logo in footer */
         .footer-logo-col {
             display: flex;
             align-items: center;
@@ -264,7 +450,6 @@
         .footer-logo-col img:hover {
             opacity: 1;
         }
-
         .copyright {
             text-align: center;
             font-size: 0.9rem;
@@ -273,58 +458,19 @@
             padding-top: 20px;
             margin-top: 20px;
         }
-    
-        
-        /* Mobile Menu */
-        .mobile-logo-link { display: none; }
-        .mobile-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; margin-left: auto; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; }
-        .hamburger-line { width: 100%; height: 2px; background-color: #bdccd4; transition: all 0.3s ease; }
-        
-        @media (max-width: 768px) {
-            .mobile-menu-btn { display: flex; }
-            nav { flex-wrap: wrap; position: relative; }
-            .nav-carousel, .nav-carousel-container { display: none; width: 100%; }
-            nav.active .nav-carousel, nav.active .nav-carousel-container { display: flex; position: absolute; top: 100%; left: 0; right: 0; width: 100vw; background-color: #1c1c1c; flex-direction: column; align-items: center; padding: 20px 0; border-bottom: 2px solid #bbbdbf; z-index: 1000; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); overflow: visible; }
-            nav.active .nav-items-container { overflow: visible; display: flex; justify-content: center; width: 100%; }
-            nav.active .nav-items { display: flex; flex-direction: column; width: 100%; transform: none !important; animation: none; gap: 20px; text-align: center; justify-content: center; overflow: visible; }
-            nav.active .scroll-btn { display: none; }
-            nav.active .nav-items > li, nav.active .nav-items > a { display: block; width: 100%; }
-            .current-page { display: none; }
-            
-            nav.active .mobile-menu-btn .hamburger-line:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
-            nav.active .mobile-menu-btn .hamburger-line:nth-child(2) { opacity: 0; }
-            nav.active .mobile-menu-btn .hamburger-line:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
-
-            /* Mobile Header layout and hidden logos */
-            .mobile-logo-link { display: block; margin-right: 15px; margin-left: auto; }
-            .mobile-logo { height: 20px; vertical-align: middle; }
-            .nav-clone { display: none !important; }
-            .nav-items a.logo { display: none !important; }
-            .nav-items li:has(a.logo) { display: none !important; }
-            .mobile-menu-btn { margin-left: 15px !important; margin-right: auto !important; }
-
-            /* Scale thumbnails to 50% on mobile */
-            .gallery-item {
-                width: 140px; /* 50% of 280px */
-            }
-            .gallery-thumbnail {
-                height: 200px; /* 50% of 400px */
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <nav>
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" aria-label="Toggle Menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <a href="/" class="mobile-logo-link"><img src="images/liewright_logo.png" alt="Liewright Logo" class="mobile-logo"></a>
             <div class="nav-carousel">
-                
                 <div class="nav-items-container">
                     <ul class="nav-items">
                         <li><a href="/" class="logo"><img src="images/liewright_logo.png" alt="Liewright Logo"></a></li>
@@ -340,60 +486,77 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
             </div>
         </nav>
     </header>
 
-    <div class="container">
-        <h1>Photography</h1>
-        
-        <div class="gallery-section">
-            <div class="gallery-row">
-                <div class="gallery-row-title">Photography Collection</div>
-                <div class="gallery-container">
-                    <div class="gallery-items">
-                        <div class="gallery-item">
-                            <a href="images/photography/full/photo-001.jpg" target="_blank">
-                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Photography 1" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Photo 1</div>
-                        </div>
-                        <div class="gallery-item">
-                            <a href="images/photography/full/photo-002.jpg" target="_blank">
-                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Photography 2" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Photo 2</div>
-                        </div>
-                        <div class="gallery-item">
-                            <a href="images/photography/full/photo-003.jpg" target="_blank">
-                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Photography 3" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Photo 3</div>
-                        </div>
-                        <div class="gallery-item">
-                            <a href="images/photography/full/photo-004.jpg" target="_blank">
-                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Photography 4" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Photo 4</div>
-                        </div>
-
-                        <!-- Advertisement -->
-                        <div class="gallery-item">
-                            <a href="https://liewright.com/Dallies-Floral-Hand-&-Body-Wash-p605212100" target="_blank">
-                                <img src="Assets/Ad/Dallies.jpg" alt="Advertisement" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Sponsored</div>
-                        </div>
-                        <div class="gallery-item">
-                            <a href="images/photography/full/photo-005.jpg" target="_blank">
-                                <img src="Assets/photos/Coming%20Soon.jpg" alt="Photography 5" class="gallery-thumbnail">
-                            </a>
-                            <div class="gallery-item-title">Photo 5</div>
-                        </div>
-                    </div>
+    <div class="article-page">
+        <article class="article-container">
+            <header class="article-header">
+                <span class="article-category">Photography & Fine Art</span>
+                <h1 class="article-title">Define the Era — Capturing the Space</h1>
+                <div class="article-meta">
+                    <span class="article-meta-item">By Liewright Studio</span>
+                    <span class="article-meta-item">July 20, 2026</span>
+                    <span class="article-meta-item">3 min read</span>
                 </div>
+            </header>
+
+            <div class="image-wrapper">
+                <img src="images/photography/full/photo-001.jpg" alt="Overhead Alley Art Installation">
+                <div class="image-guard"></div>
             </div>
+            <div class="image-caption">Figure 1: Overhead art installation in Palmer Alley, showcasing vibrant, translucent colors catching natural light.</div>
+
+            <div class="article-body">
+                <p class="article-lead">
+                    Exploring the tension between form, light, and public spaces, this collection translates the living, shifting expressions of design into visual archives.
+                </p>
+                
+                <p>
+                    In 2026, design is defined by constant movement—borrowed, remixed, and forward-looking. To document this evolution, these photographic studies capture instances where architecture and art interact with public routines. The objects, the light, and the physical spaces become coordinates of a larger visual narrative.
+                </p>
+                
+                <p>
+                    Every public space has a silent rhythm. As people move through alleys, plazas, and city centers, they encounter unexpected configurations of color and scale overhead. The selected installation captures this open-air gallery quality, redefining how the space feels in motion.
+                </p>
+
+                <div class="image-wrapper">
+                    <img src="images/photography/full/photo-002.jpg" alt="Concrete Architectural Shadows">
+                    <div class="image-guard"></div>
+                </div>
+                <div class="image-caption">Figure 2: Minimalist study of geometric shadows and warm afternoon sunlight cast across concrete walls.</div>
+
+                <p>
+                    Shadows are not empty spaces; they are structured forms. By capturing the sharp geometric lines formed by the late afternoon sun on concrete blocks, these frames analyze how light reshapes architectural textures. The result is a stark, high-contrast study in silence and permanence.
+                </p>
+
+                <div class="image-wrapper">
+                    <img src="images/photography/full/photo-003.jpg" alt="Atmospheric Coastal Fog">
+                    <div class="image-guard"></div>
+                </div>
+                <div class="image-caption">Figure 3: Moody atmospheric fog and silhouettes along the rugged, silent coastlines.</div>
+
+                <p>
+                    Contrast this geometric rigidity with the soft, unpredictable lines of natural environments. The misty coastal cliffs captured here isolate single silhouettes against vast atmospheric gradients. It is an exploration of scale, mood, and quiet contemplation away from the city structure.
+                </p>
+            </div>
+        </article>
+    </div>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightbox-modal">
+        <div class="lightbox-content">
+            <button id="lightbox-close" class="lightbox-control" aria-label="Close lightbox">&times;</button>
+            <button id="lightbox-prev" class="lightbox-control" aria-label="Previous image">&#10094;</button>
+            <button id="lightbox-next" class="lightbox-control" aria-label="Next image">&#10095;</button>
+            
+            <div class="lightbox-image-wrapper">
+                <img id="lightbox-img" src="" alt="Enlarged gallery image">
+                <div class="image-guard"></div>
+            </div>
+            
+            <div class="lightbox-caption"></div>
         </div>
     </div>
 
@@ -435,8 +598,25 @@
         </div>
     </footer>
 
-        <script>
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            if (mobileMenuBtn && nav) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    const itemsContainers = document.querySelectorAll('.nav-items-container, .nav-carousel, .nav-carousel-container');
+                    itemsContainers.forEach(el => {
+                        if (nav.classList.contains('active')) {
+                            el.style.display = 'flex';
+                        } else {
+                            el.style.display = '';
+                        }
+                    });
+                });
+            }
+
             // --- Nav Carousel Logic ---
             const carousel = document.querySelector(".nav-carousel");
             if (carousel) {
@@ -516,10 +696,124 @@
                     navLoop();
                 }
             }
+
+            // --- Custom Lightbox Logic ---
+            const lightbox = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.querySelector('.lightbox-caption');
+            const triggers = document.querySelectorAll('.image-wrapper');
+            
+            let currentIndex = 0;
+            const imagesData = [];
+            let controlsTimeout;
+
+            // Collect image and caption data
+            triggers.forEach((trigger, index) => {
+                const img = trigger.querySelector('img');
+                const captionEl = trigger.nextElementSibling;
+                const captionText = (captionEl && captionEl.classList.contains('image-caption')) ? captionEl.textContent : '';
+                
+                imagesData.push({
+                    src: img.getAttribute('src'),
+                    caption: captionText
+                });
+
+                // Attach click event to trigger lightbox
+                trigger.addEventListener('click', () => {
+                    currentIndex = index;
+                    openLightbox();
+                });
+            });
+
+            function openLightbox() {
+                updateLightboxImage();
+                lightbox.classList.add('active');
+                showControls();
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.classList.remove('controls-visible');
+                clearTimeout(controlsTimeout);
+            }
+
+            function updateLightboxImage() {
+                const data = imagesData[currentIndex];
+                lightboxImg.setAttribute('src', data.src);
+                lightboxCaption.textContent = data.caption;
+            }
+
+            // Controls Visibility Hover Behavior (Video Player style)
+            function showControls() {
+                lightbox.classList.add('controls-visible');
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                    lightbox.classList.remove('controls-visible');
+                }, 2000);
+            }
+
+            lightbox.addEventListener('mousemove', showControls);
+            lightbox.addEventListener('click', showControls);
+
+            // Button Click Handlers
+            document.getElementById('lightbox-close').addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+
+            document.getElementById('lightbox-prev').addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+                updateLightboxImage();
+                showControls();
+            });
+
+            document.getElementById('lightbox-next').addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex + 1) % imagesData.length;
+                updateLightboxImage();
+                showControls();
+            });
+
+            // Close when clicking background
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-content') || e.target.classList.contains('image-guard')) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+                    updateLightboxImage();
+                    showControls();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % imagesData.length;
+                    updateLightboxImage();
+                    showControls();
+                }
+            });
+
+            // --- Robust Image Copy Protection ---
+            document.addEventListener('contextmenu', (e) => {
+                if (e.target.tagName === 'IMG' || e.target.classList.contains('image-guard') || e.target.closest('.image-wrapper')) {
+                    e.preventDefault();
+                }
+            });
+
+            document.addEventListener('dragstart', (e) => {
+                if (e.target.tagName === 'IMG' || e.target.classList.contains('image-guard')) {
+                    e.preventDefault();
+                }
+            });
         });
     </script>
-<!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/246359500.js"></script>
-<!-- End of HubSpot Embed Code -->
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/246359500.js"></script>
+    <!-- End of HubSpot Embed Code -->
 </body>
 </html>
