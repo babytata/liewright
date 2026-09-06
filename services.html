@@ -30,10 +30,10 @@
         }
 
         nav {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -50,20 +50,40 @@
             background-color: transparent;
         }
 
-                /* Navigation Styles */
+                                /* Carousel Styles */
         .nav-carousel {
             display: flex;
             align-items: center;
-            justify-content: center;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-items-container {
+            overflow: hidden;
             flex-grow: 1;
             position: relative;
         }
 
-        .nav-items-container {
-            display: flex;
-            justify-content: center;
-            flex-grow: 1;
-            position: relative;
+        .nav-items-container::before,
+        .nav-items-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .nav-items-container::before {
+            left: 0;
+            background: linear-gradient(to right, #1c1c1c, transparent);
+        }
+
+        .nav-items-container::after {
+            right: 0;
+            background: linear-gradient(to left, #1c1c1c, transparent);
         }
 
         nav ul.nav-items {
@@ -72,13 +92,11 @@
             padding: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px 12px;
+            will-change: transform;
         }
 
         nav ul.nav-items li {
-            margin: 0;
+            margin: 0 15px;
             flex-shrink: 0;
         }
 
@@ -877,99 +895,124 @@ nav ul li a {
             </div>
         </div>
         <div class="copyright">
-            © 2026 Liewright LLC. All rights reserved. Designed & Developed by Liewright. (v1.1.3)
+            © 2026 Liewright LLC. All rights reserved. Designed & Developed by Liewright. (v1.1.4)
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const nav = document.querySelector('nav');
-            if (mobileMenuBtn && nav) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    nav.classList.toggle('active');
-                    const itemsContainers = document.querySelectorAll('.nav-items-container, .nav-carousel, .nav-carousel-container');
-                    itemsContainers.forEach(el => {
-                        if (nav.classList.contains('active')) {
-                            el.style.display = 'flex';
-                        } else {
-                            el.style.display = '';
-                        }
+            // --- Nav Carousel Logic (Edge Scroll with Link Pause) ---
+            (function initNavCarousel() {
+                const carousel = document.querySelector('.nav-carousel');
+                if (!carousel) return;
+                const navItems = carousel.querySelector('.nav-items');
+                if (!navItems) return;
+
+                const originalItems = Array.from(navItems.querySelectorAll('li'));
+                if (originalItems.length > 0) {
+                    // Clone items for infinite loop
+                    originalItems.forEach(item => {
+                        let c = item.cloneNode(true);
+                        c.classList.add('nav-clone');
+                        navItems.appendChild(c);
                     });
+                    originalItems.forEach(item => {
+                        let c = item.cloneNode(true);
+                        c.classList.add('nav-clone');
+                        navItems.appendChild(c);
+                    });
+                }
+
+                let trackPos = 0;
+                let currentScrollSpeed = 0;
+                let targetScrollSpeed = 0;
+                let isNavMouseOver = false;
+                let isHoveringLink = false;
+                let mouseX = 0;
+
+                // Hover pause on links so user can click without chasing
+                navItems.addEventListener('mouseover', (e) => {
+                    if (e.target.closest('a')) {
+                        isHoveringLink = true;
+                    }
                 });
-            }
-
-            // Form Submit handler utilizing the existing Netlify function
-            document.getElementById('project-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const btn = document.getElementById('submit-btn');
-                const statusDiv = document.getElementById('form-status');
-                
-                // Enforce recaptcha client-side using Google's API
-                let recaptchaPassed = false;
-                try {
-                    if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse && grecaptcha.getResponse().length > 0) {
-                        recaptchaPassed = true;
+                navItems.addEventListener('mouseout', (e) => {
+                    if (!e.relatedTarget || !e.relatedTarget.closest('a')) {
+                        isHoveringLink = false;
                     }
-                } catch (err) {
-                    recaptchaPassed = false;
-                }
-                if (!recaptchaPassed) {
-                    statusDiv.textContent = "Please check the 'I am not a robot' box before submitting.";
-                    statusDiv.className = "form-message error";
-                    statusDiv.style.display = "block";
-                    return;
-                }
-                
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const budget = document.getElementById('budget').value;
-                const location = document.getElementById('location').value;
-                const message = document.getElementById('needs').value;
+                });
 
-                // Split name for airtable compatibility
-                const nameParts = name.trim().split(' ');
-                const firstName = nameParts[0];
-                const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : ' ';
+                carousel.addEventListener('mouseenter', (e) => {
+                    isNavMouseOver = true;
+                    mouseX = e.clientX;
+                    currentScrollSpeed = 0;
+                    targetScrollSpeed = 0;
+                });
+                carousel.addEventListener('mouseleave', () => {
+                    isNavMouseOver = false;
+                    isHoveringLink = false;
+                });
+                carousel.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                });
 
-                const formData = {
-                    first_name: firstName,
-                    last_name: lastName,
-                    email: email,
-                    location: location,
-                    message: message,
-                    budget: budget,
-                    source_site: "Liewright Services / Hire Me"
-                };
+                function navLoop() {
+                    const nav = document.querySelector('nav');
+                    if (nav && nav.classList.contains('active')) {
+                        requestAnimationFrame(navLoop);
+                        return;
+                    }
 
-                btn.textContent = "Sending...";
-                btn.disabled = true;
+                    if (isNavMouseOver && !isHoveringLink) {
+                        const rect = carousel.getBoundingClientRect();
+                        const width = rect.width;
+                        const relativeX = mouseX - rect.left;
 
-                try {
-                    const response = await fetch('/.netlify/functions/submitTicket', {
-                        method: 'POST',
-                        body: JSON.stringify(formData)
-                    });
+                        // Outer 15% edge zones, center 70% dead zone
+                        const leftThreshold = width * 0.15;
+                        const rightThreshold = width * 0.85;
+                        const maxSpeed = 2.0;
 
-                    if (response.ok) {
-                        statusDiv.textContent = "Thanks! I'll get back to you shortly.";
-                        statusDiv.className = "form-message success";
-                        document.getElementById('project-form').reset();
+                        if (relativeX < leftThreshold && relativeX >= 0) {
+                            const ratio = (leftThreshold - relativeX) / leftThreshold;
+                            targetScrollSpeed = -1 * maxSpeed * (ratio * ratio);
+                        } else if (relativeX > rightThreshold && relativeX <= width) {
+                            const ratio = (relativeX - rightThreshold) / (width - rightThreshold);
+                            targetScrollSpeed = maxSpeed * (ratio * ratio);
+                        } else {
+                            targetScrollSpeed = 0;
+                        }
                     } else {
-                        statusDiv.textContent = "Oops! Something went wrong. Please try again or email me directly.";
-                        statusDiv.className = "form-message error";
+                        targetScrollSpeed = 0;
                     }
-                } catch (error) {
-                    statusDiv.textContent = "Connection error. Please try again later.";
-                    statusDiv.className = "form-message error";
-                } finally {
-                    btn.textContent = "👉 Start My Project";
-                    btn.disabled = false;
+
+                    // Instantly freeze when hovering a link
+                    if (isHoveringLink) {
+                        currentScrollSpeed = 0;
+                        targetScrollSpeed = 0;
+                    } else {
+                        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.08;
+                    }
+
+                    if (Math.abs(currentScrollSpeed) > 0.005) {
+                        trackPos += currentScrollSpeed;
+                        const scrollWidth = navItems.scrollWidth;
+                        const oneSetWidth = scrollWidth / 3;
+
+                        if (oneSetWidth > 0) {
+                            if (trackPos >= oneSetWidth) {
+                                trackPos = trackPos % oneSetWidth;
+                            } else if (trackPos < 0) {
+                                trackPos = oneSetWidth + (trackPos % oneSetWidth);
+                            }
+                            navItems.style.transform = `translateX(-${trackPos}px)`;
+                        }
+                    }
+
+                    requestAnimationFrame(navLoop);
                 }
-            });
-        });
+                navLoop();
+            })();
     </script>
 <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/246359500.js"></script>
